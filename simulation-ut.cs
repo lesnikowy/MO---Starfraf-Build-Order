@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Logger;
 
 namespace StarcraftBuildOrderApp
 {
@@ -22,7 +23,7 @@ namespace StarcraftBuildOrderApp
 
             score = sim_unit.run(bld_order);
 
-            Console.WriteLine("INFO: Build order compleated with time " + score);
+            Logger.Log.Write("INFO: Build order compleated with time " + score);
 
             System.Threading.Thread.Sleep(5000);
         }
