@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 
 namespace Logger {
-  class log {
+  class Log {
     public static void Write(string text) {
       StackTrace Trace = new StackTrace();
       DateTime currentTime = DateTime.Now;
