@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Logger;
 
 namespace StarcraftBuildOrderApp.simulation
 {
@@ -18,7 +19,7 @@ namespace StarcraftBuildOrderApp.simulation
             unit_list = new List<unit>();
             total_supply_usage = 0;
             total_supply = 0;
-            Console.WriteLine("INFO: sim object initialized");
+            Logger.Log.Write("INFO: sim object initialized");
         }
 
         ~sim() {
@@ -39,8 +40,8 @@ namespace StarcraftBuildOrderApp.simulation
             }
 
             while (!is_full_build_done()) {
-                Console.WriteLine("**************************");
-                Console.WriteLine("TIME = " + time + " RESOURCES = " + resources);
+                Logger.Log.Write("**************************");
+                Logger.Log.Write("TIME = " + time + " RESOURCES = " + resources);
 
                 refresh_all_units_states();
                 update_supply_stats();
@@ -71,12 +72,12 @@ namespace StarcraftBuildOrderApp.simulation
         }
 
         private void print_unit_list() {
-            Console.WriteLine("***************************");
-            Console.WriteLine("Input build order:");
+            Logger.Log.Write("***************************");
+            Logger.Log.Write("Input build order:");
             for (int i = 0; i < unit_list.Count; i++) {
                 Console.WriteLine( " " + (i+1) + " " + unit_list[i].name);
             }
-            Console.WriteLine("***************************");
+            Logger.Log.Write("***************************");
         }
 
         private List <unit_type> get_unit_type_list() {
@@ -103,14 +104,14 @@ namespace StarcraftBuildOrderApp.simulation
         private bool is_order_executable() {
             for (int i = 0; i < unit_list.Count; i++) {
                 if (!are_requirements_met(i, true)) {
-                    Console.WriteLine("ERROR: unit type list not executable - requirements for unit " + unit_list[i].name + " not met");
+                    Logger.Log.Write("ERROR: unit type list not executable - requirements for unit " + unit_list[i].name + " not met");
                     return false;
                 }
             }
 
             for (int i = 0; i < unit_list.Count; i++) {
                 if (count_supply(i, false) < count_supply_usage(i, false)) {
-                    Console.WriteLine("ERROR: unit type list not executable - no supply for unit on index " + i);
+                    Logger.Log.Write("ERROR: unit type list not executable - no supply for unit on index " + i);
                     return false;
                 }
             }
@@ -172,9 +173,9 @@ namespace StarcraftBuildOrderApp.simulation
             total_supply = count_supply(unit_list.Count, true);
 
             if (total_supply_usage > total_supply) {
-                Console.WriteLine("ERROR: total_supply_usage = " + total_supply_usage + " is greater than total_supply = " + total_supply);
+                Logger.Log.Write("ERROR: total_supply_usage = " + total_supply_usage + " is greater than total_supply = " + total_supply);
             } else { 
-                Console.WriteLine("supply used = " + total_supply_usage + " total supply = " + total_supply);               
+                Logger.Log.Write("supply used = " + total_supply_usage + " total supply = " + total_supply);               
             }
         }
 
@@ -222,7 +223,7 @@ namespace StarcraftBuildOrderApp.simulation
                 if (unit_list[i].get_state() == unit_state.NOT_EXISTS) {
                     found_non_existing_unit = true;
                     index_of_non_existing_unit = i;
-                    Console.WriteLine("next = " + index_of_non_existing_unit);
+                    Logger.Log.Write("next = " + index_of_non_existing_unit);
                     break;
                 }
             }
