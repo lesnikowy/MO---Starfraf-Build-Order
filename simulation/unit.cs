@@ -283,7 +283,7 @@ namespace StarcraftBuildOrderApp.simulation
                 // chceck if unit can be constructed
                 state = unit_state.UNDER_CONSTRUCTION;
                 bld_time_left = bld_time;
-                Logger.Log.Write("INFO: "u_type + " is under construction");
+                Logger.Log.Write("INFO: " + u_type + " is under construction");
             } else {
                 Logger.Log.Write("ERROR: Cannot start unit " + name + " build - invalid state = " + state);
             }
