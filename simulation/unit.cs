@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Logger;
 
 namespace StarcraftBuildOrderApp.simulation
 {
@@ -66,7 +67,7 @@ namespace StarcraftBuildOrderApp.simulation
             }
 
             if (type < unit_type.NO_UNIT && type > unit_type.UNIT_TYPE_SIZE) {
-                Console.WriteLine("ERROR: unit class constructor: unknown unit type " + type + "\n");
+                Logger.Log.Write("ERROR: unit class constructor: unknown unit type " + type + "\n");
                 System.Threading.Thread.Sleep(1000);
                 Environment.Exit(0);
             } else {
@@ -249,7 +250,7 @@ namespace StarcraftBuildOrderApp.simulation
                         requirements.Add(unit_type.FACTORY);
                         break;
                     default:
-                        Console.WriteLine("ERROR: UNKNOWN UNIT TYPE: " + type + ". EXITING...\n");
+                        Logger.Log.Write("ERROR: UNKNOWN UNIT TYPE: " + type + ". EXITING...\n");
                         System.Threading.Thread.Sleep(1000);
                         Environment.Exit(0);
                         break;
@@ -269,10 +270,10 @@ namespace StarcraftBuildOrderApp.simulation
             if (state == unit_state.UNDER_CONSTRUCTION) {
                 if (bld_time_left == 0) {
                     state = unit_state.READY;
-                    Console.WriteLine(u_type + " build finished!!!");
+                    Logger.Log.Write(u_type + " build finished!!!");
                 } else {
                     bld_time_left--;
-                    Console.WriteLine(bld_time_left + " until " + u_type + " build finish");
+                    Logger.Log.Write(bld_time_left + " until " + u_type + " build finish");
                }
             }
         }
@@ -282,18 +283,18 @@ namespace StarcraftBuildOrderApp.simulation
                 // chceck if unit can be constructed
                 state = unit_state.UNDER_CONSTRUCTION;
                 bld_time_left = bld_time;
-                Console.WriteLine(u_type + " is under construction");
+                Logger.Log.Write("INFO: "u_type + " is under construction");
             } else {
-                Console.WriteLine("ERROR: Cannot start unit " + name + " build - invalid state = " + state);
+                Logger.Log.Write("ERROR: Cannot start unit " + name + " build - invalid state = " + state);
             }
         }
 
         public bool set_constructed_unit_index(int unit_index) {
             if (constructed_unit_index != sim_const.constructed_unit_index_no_unit) {
-                Console.WriteLine("ERROR: Attempt to construct unit when factory is bussy");
+                Logger.Log.Write("ERROR: Attempt to construct unit when factory is bussy");
                 return false;
             } else {
-                Console.WriteLine(u_type + " is constructiong unit with index " + unit_index);
+                Logger.Log.Write(u_type + " is constructiong unit with index " + unit_index);
                 constructed_unit_index = unit_index;
                 return true;
             }
