@@ -237,7 +237,6 @@ namespace StarcraftBuildOrderApp.simulation
                 if (unit_list[i].get_state() == unit_state.NOT_EXISTS) {
                     found_non_existing_unit = true;
                     index_of_non_existing_unit = i;
-                    Logger.Log.Write("next = " + index_of_non_existing_unit);
                     break;
                 }
             }
