@@ -4,25 +4,86 @@ namespace StarcraftBuildOrderApp.tabusearch
 {
 	public class TabuSearch
 	{
-		public TabuSearch ()
+		int howManyNeighbours;
+		int retention;
+		TabuList tabuList;
+
+		Solution bestSolution;
+		float bestSolutionValue;
+
+		public TabuSearch (int howManyNeighbours, int retention)
 		{
+			this.howManyNeighbours = howManyNeighbours;
+			this.retention = retention;
+			tabuList = new TabuList (retention);
 		}
 
-		public void iterate()
+		public Solution iterate()
 		{
-			// zrob sasiadow
-			// sprawdz wszystkich sasiadow, ale nie tych co sa na TL
-			// j.w. ale tylko tych z TL
-			// update tabu
-			// dodaj najlepszy ruch do tabu
-			// jesli ten ruch najelpszy z najlepszych to podmien globalne minimum
-			// jesli ukaszowe lepsze niz aktualne to bieremy je do nastepnej iteracji i jako globalne minimum
-			// psy szczekaja, karawana jedzie dalej
+			Solution[] neighbours = createNeighbours(start);
+			Solution localBest = null;
+			float localBestValue = float.MaxValue;
+			Solution localBestTL = null;
+			float localBestTLValue = float.MaxValue;
+
+			Solution nextSolution = null;
+
+			// Find lowest cost neighbours
+			for(int i=0;i<howManyNeighbours;i++)
+			{
+				Solution nb = neighbours[i];
+				float value = evaluateSolution(nb);
+				if (tabuList.isOnTabooList(nb.getLastMove())) {
+					if (value < localBestTLValue) {
+						localBestTL = nb;
+						localBestTLValue = value;
+					}
+				} else {
+					if (value < localBestValue) {
+						localBest = nb;
+						localBestValue = value;
+					}
+				}	
+			}
+			// Update TL
+			tabuList.clearOldMoves();
+			nextSolution = localBest;
+			tabuList.addToTabuList(nextSolution.getLastMove());
+			// Choose best solution
+			if (localBestValue < localBestTLValue && localBestValue < bestSolutionValue) {
+				bestSolution = localBest;
+				bestSolutionValue = localBestValue;
+			} else if (localBestValue > localBestTLValue && localBestTLValue < bestSolutionValue) {
+				nextSolution = bestSolution = localBestTL;
+				bestSolutionValue = localBestTLValue;
+			}
+			return nextSolution;
 		}
 
-		private void createNeighbours()
+		private Solution[] createNeighbours()
 		{
-			// jakims cudem stworz sasiadow
+			Solution[] neighbours = new Solution[howManyNeighbours];
+			Random rnd = new Random();
+
+			for(int i=0;i<howManyNeighbours;i++) {
+				Solution newNeighbour = new Solution(solution);
+				Boolean drawnTheSameElements = true;
+				int indexA = 0, indexB = 0;
+				int loopBoundary = 0;
+				while(drawnTheSameElements) {
+					indexA = rnd.Next(0, newNeighbour.getItemsQuantity() - 1);
+					indexB = rnd.Next(0, newNeighbour.getItemsQuantity() - 1);
+					if (loopBoundary > 1000)
+						break;
+					loopBoundary++;
+					if (newNeighbour.itemsAtIndexesHaveDifferentLength(indexA, indexB))
+						drawnTheSameElements = false;
+				}
+
+				newNeighbour.exchangeTwoItems(indexA, indexB);
+				neighbours[i] = newNeighbour;
+			}
+			return neighbours;
 		}
 
 		private void evaluateSolution()

@@ -43,5 +43,8 @@
     <Compile Include="simulation\sim_const.cs" />
     <Compile Include="simulation\unit.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="tabusearch\TabuList.cs" />
+    <Compile Include="tabusearch\Solution.cs" />
+    <Compile Include="tabusearch\TabuListItem.cs" />
   </ItemGroup>
 </Project>
