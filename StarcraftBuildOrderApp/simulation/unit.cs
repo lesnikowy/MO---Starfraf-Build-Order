@@ -199,6 +199,7 @@ namespace StarcraftBuildOrderApp.simulation
                         supply = 0;
                         building = true;
                         products.Add(unit_type.MARINE);
+                        products.Add(unit_type.FIREABT);
                         requirements.Add(unit_type.CMD_CENTER);
                         break;
                     case unit_type.ACADEMY:
