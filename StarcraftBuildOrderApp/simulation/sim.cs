@@ -26,15 +26,16 @@ namespace StarcraftBuildOrderApp.simulation
             // nothing to destroy
         }
 
-        public uint run(List <unit_type> raw_unit_vector) {
+        public uint run(List <unit> raw_unit_vector) {
             time = sim_const.start_time;
             resources = sim_const.start_resources;
             total_supply_usage = 0;
             total_supply = 0;
-
-            build_unit_list(raw_unit_vector);
+            unit_list = raw_unit_vector;
+            //build_unit_list(raw_unit_vector);
             print_unit_list();
 
+            // niech to zostanie do konca testow
             if (!is_order_executable()) {
                 return 0;
             }
