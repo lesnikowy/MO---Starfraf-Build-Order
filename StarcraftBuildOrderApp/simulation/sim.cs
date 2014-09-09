@@ -91,13 +91,26 @@ namespace StarcraftBuildOrderApp.simulation
         }
 
 	private bool are_requirements_met(int index, bool init_check) {
-            List <unit_type> temp_unit_type_list = get_unit_type_list();
-            for (int j = 0; j < unit_list[index].requirements.Count; j++) {
-                if (!temp_unit_type_list.GetRange(0, index).Contains(unit_list[index].requirements[j]) && (!init_check || unit_list[index].get_state() == unit_state.READY)) {
-                   return false;
+	    bool found;
+	    for (int i = 0; i < unit_list[index].requirements.Count; i++) {
+		found = false;
+		for (int j = 0; j < index; j++) {
+		    if (unit_list[index].requirements[i] == unit_list[j].u_type) {
+			if (!init_check) {
+			    if (unit_list[j].get_state() == unit_state.READY) {
+				found = true;
+				break;
+			    }
+			} else {
+			    found = true;
+			    break;			    
+			}
+		    }
+		}
+		if (!found) {
+		    return false;
                 }
-            }
-  
+	    }
             return true;
         }
 
@@ -218,6 +231,7 @@ namespace StarcraftBuildOrderApp.simulation
         private void perform_build_actions() {
             int index_of_non_existing_unit = 0;
             bool found_non_existing_unit = false;
+	    bool try_pararelization;
             int factory_index;
             for (int i = 0; i < unit_list.Count; i++) {
                 if (unit_list[i].get_state() == unit_state.NOT_EXISTS) {
@@ -230,14 +244,16 @@ namespace StarcraftBuildOrderApp.simulation
 
             if (found_non_existing_unit) {
                 do {
+               	    try_pararelization = false;
                     factory_index = find_factory_not_bussy(index_of_non_existing_unit);
                     if (can_be_constructed(index_of_non_existing_unit) && factory_index != sim_const.constructed_unit_index_no_unit) {
                         unit_list[factory_index].set_constructed_unit_index(index_of_non_existing_unit);
                         unit_list[index_of_non_existing_unit].enter_bld_state();
                         resources -= unit_list[index_of_non_existing_unit].cost;
+                        try_pararelization = true;
                     }
                     index_of_non_existing_unit++;
-                    if (! (index_of_non_existing_unit < unit_list.Count)) {
+                    if (! (index_of_non_existing_unit < unit_list.Count) || !try_pararelization) {
                         break;
                     }
                 } while (unit_list[index_of_non_existing_unit].get_state() == unit_state.NOT_EXISTS); // pararelization
