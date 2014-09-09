@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StarcraftBuildOrderApp
+namespace StarcraftBuildOrderApp.tabusearch
 {
 	enum ItemType {
 		ADDING = 1,

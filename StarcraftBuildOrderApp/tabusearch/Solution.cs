@@ -1,23 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using StarcraftBuildOrderApp.simulation;
 
-namespace StarcraftBuildOrderApp
+namespace StarcraftBuildOrderApp.tabusearch
 {
 	public class Solution
 	{
-		private List<Item> items;
-		private TabooListItem lastMove;
+		private List<unit_type> items;
+		private TabuListItem lastMove;
 
 		public Solution()
 		{
-			items = new ArrayList<Item>();
-			lastMove = new TabooListItem();
+			items = new List<unit_type>();
+			lastMove = null;
 		}
 
+		/* Konstruktor kopiujacy
 		public Solution(Solution solution) {
-			ArrayList<Item> i = (ArrayList<Item>)solution.items;
+			List<unit_type> i = (ArrayList<Item>)solution.items;
 			this.items = (ArrayList<Item>)i.clone();
 			this.lastMove = new TabooListItem();
-		}
+		} */
 
 		public void populateSolution(List<Item> plannedItems) {
 			for(int i=0;i<plannedItems.size();i++) {

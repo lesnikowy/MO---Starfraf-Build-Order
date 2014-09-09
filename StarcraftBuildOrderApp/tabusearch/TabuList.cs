@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace StarcraftBuildOrderApp
+namespace StarcraftBuildOrderApp.tabusearch
 {
 	public class TabuList
 	{
