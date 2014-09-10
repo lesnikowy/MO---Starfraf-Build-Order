@@ -25,6 +25,8 @@ namespace StarcraftBuildOrderApp
 			}
 
 			Console.WriteLine("Score: " + tabu.bestSolutionValue);
+			tabu.bestSolution.printSolution ();
+
 
 			Console.WriteLine ("KONIEC");
             Console.ReadKey();
