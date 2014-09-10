@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using StarcraftBuildOrderApp.simulation;
 using StarcraftBuildOrderApp.cost_calc;
+using StarcraftBuildOrderApp.tabusearch;
 
 namespace StarcraftBuildOrderApp
 {
@@ -14,26 +15,14 @@ namespace StarcraftBuildOrderApp
             
             float score;
             // do not include starting units: SCVs and Command Center
-            List<unit_type> bld_order = new List<unit_type>();
+            
+			TabuSearch tabu = new TabuSearch (10, 50, new Solution ());
+			Solution s = tabu.iterate (tabu.bestSolution);
+			for (int i = 0; i < 500; i++) {
+				s = tabu.iterate (s);
+			}
 
-           
-
-            cost.build_req.Add(unit_type.MARINE);
-            cost.build_req.Add(unit_type.MARINE);
-
-
-            bld_order.Add(unit_type.SCV);
-            bld_order.Add(unit_type.BARRACKS);
-            bld_order.Add(unit_type.BARRACKS);
-            bld_order.Add(unit_type.MARINE);
-            bld_order.Add(unit_type.MARINE);
-            bld_order.Add(unit_type.ACADEMY);
-
-
-
-            score = cost.calc(bld_order);
-
-            Console.WriteLine("Score: " + score);
+			Console.WriteLine("Score: " + tabu.bestSolutionValue);
 
             Console.ReadKey();
         }

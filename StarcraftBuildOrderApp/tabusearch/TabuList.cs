@@ -26,17 +26,18 @@ namespace StarcraftBuildOrderApp.tabusearch
 				if (item.retention > 1)
 					item.retention--;
 				else
-					tabulist.Remove(i); i--;
+					tabulist.RemoveAt(i); i--;
 			}
 		}
 
 		public void addToTabuList(TabuListItem item)
 		{
-			if (isOnTabooList (item))
-				tabulist [tabulist.FindIndex (item)].retention = retention;
-			else
+			if (isOnTabooList (item)) {
+				int index = tabulist.IndexOf (item);
+				tabulist [index].retention = retention;
+			} else
 				tabulist.Add (item);
 		}
+			
 	}
 }
-

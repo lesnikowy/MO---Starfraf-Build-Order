@@ -1,26 +1,29 @@
 ﻿using System;
+using StarcraftBuildOrderApp.cost_calc;
 
 namespace StarcraftBuildOrderApp.tabusearch
 {
 	public class TabuSearch
 	{
-		int howManyNeighbours;
-		int retention;
-		TabuList tabuList;
+		private int howManyNeighbours;
+		private int retention;
+		private TabuList tabuList;
 
-		Solution bestSolution;
-		float bestSolutionValue;
+		public Solution bestSolution;
+		public float bestSolutionValue;
 
-		public TabuSearch (int howManyNeighbours, int retention)
+		public TabuSearch (int howManyNeighbours, int retention, Solution seed)
 		{
 			this.howManyNeighbours = howManyNeighbours;
 			this.retention = retention;
 			tabuList = new TabuList (retention);
+			bestSolution = seed;
+			bestSolutionValue = evaluateSolution (seed);
 		}
 
-		public Solution iterate()
+		public Solution iterate(Solution solution)
 		{
-			Solution[] neighbours = createNeighbours(start);
+			Solution[] neighbours = createNeighbours(solution);
 			Solution localBest = null;
 			float localBestValue = float.MaxValue;
 			Solution localBestTL = null;
@@ -33,7 +36,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 			{
 				Solution nb = neighbours[i];
 				float value = evaluateSolution(nb);
-				if (tabuList.isOnTabooList(nb.getLastMove())) {
+				if (tabuList.isOnTabooList(nb.lastMove)) {
 					if (value < localBestTLValue) {
 						localBestTL = nb;
 						localBestTLValue = value;
@@ -48,7 +51,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 			// Update TL
 			tabuList.clearOldMoves();
 			nextSolution = localBest;
-			tabuList.addToTabuList(nextSolution.getLastMove());
+
 			// Choose best solution
 			if (localBestValue < localBestTLValue && localBestValue < bestSolutionValue) {
 				bestSolution = localBest;
@@ -57,38 +60,29 @@ namespace StarcraftBuildOrderApp.tabusearch
 				nextSolution = bestSolution = localBestTL;
 				bestSolutionValue = localBestTLValue;
 			}
+			tabuList.addToTabuList(nextSolution.lastMove);
+			Console.WriteLine ("local best: " + localBestValue + "local best TL: " + localBestTLValue + ", best: " + bestSolutionValue);
 			return nextSolution;
 		}
 
-		private Solution[] createNeighbours()
+		private Solution[] createNeighbours(Solution solution)
 		{
 			Solution[] neighbours = new Solution[howManyNeighbours];
 			Random rnd = new Random();
 
 			for(int i=0;i<howManyNeighbours;i++) {
 				Solution newNeighbour = new Solution(solution);
-				Boolean drawnTheSameElements = true;
-				int indexA = 0, indexB = 0;
-				int loopBoundary = 0;
-				while(drawnTheSameElements) {
-					indexA = rnd.Next(0, newNeighbour.getItemsQuantity() - 1);
-					indexB = rnd.Next(0, newNeighbour.getItemsQuantity() - 1);
-					if (loopBoundary > 1000)
-						break;
-					loopBoundary++;
-					if (newNeighbour.itemsAtIndexesHaveDifferentLength(indexA, indexB))
-						drawnTheSameElements = false;
-				}
+				int randomOperation = rnd.Next (0, 2);
 
-				newNeighbour.exchangeTwoItems(indexA, indexB);
+				newNeighbour.doRandomThing (randomOperation);
 				neighbours[i] = newNeighbour;
 			}
 			return neighbours;
 		}
 
-		private void evaluateSolution()
+		private float evaluateSolution(Solution solution)
 		{
-			// wez i wywolaj zajebiste funkcje ukaszowe
+			return cost.calc (solution.getEnums ());
 		}
 
 	}

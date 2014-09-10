@@ -6,7 +6,7 @@ using Logger;
 namespace StarcraftBuildOrderApp.simulation
 {
     // unit type IDs
-    enum unit_type {
+    public enum unit_type {
         NO_UNIT = 0,
 
         // ground units

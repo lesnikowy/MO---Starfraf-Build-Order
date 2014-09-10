@@ -7,105 +7,89 @@ namespace StarcraftBuildOrderApp.tabusearch
 	public class Solution
 	{
 		private List<unit_type> items;
-		private TabuListItem lastMove;
+		public TabuListItem lastMove;
+		private const int MAXIMUM_UNITS_IN_RANDOM_SOLUTION = 10;
 
 		public Solution()
 		{
 			items = new List<unit_type>();
-			lastMove = null;
+			lastMove = new TabuListItem ();
+			createRandomSolution ();
 		}
 
-		/* Konstruktor kopiujacy
-		public Solution(Solution solution) {
-			List<unit_type> i = (ArrayList<Item>)solution.items;
-			this.items = (ArrayList<Item>)i.clone();
-			this.lastMove = new TabooListItem();
-		} */
+		public Solution(Solution solution)
+		{
+			this.items = new List<unit_type> (solution.items);
+			this.lastMove = new TabuListItem (solution.lastMove);
+		}
 
-		public void populateSolution(List<Item> plannedItems) {
-			for(int i=0;i<plannedItems.size();i++) {
-				for(int j=0;j<plannedItems.get(i).getQuantity();j++) {
-					items.add(plannedItems.get(i));
-				}
+		public Solution createRandomSolution()
+		{
+			Random rnd = new Random ();
+			int howManyUnits = rnd.Next (0, MAXIMUM_UNITS_IN_RANDOM_SOLUTION);
+			for (int i = 0; i < howManyUnits; i++) {
+				items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1));
 			}
+			return this;
 		}
 
-		public void exchangeTwoItems(Integer indexA, Integer indexB) {
-			Collections.swap(items, indexA, indexB);
-			lastMove.updateItem(indexA, indexB);
-		}
-		public Integer getItemsQuantity() {
-			return items.size();
-		}
-
-		public TabooListItem getLastMove() {
-			return lastMove;
+		public void doRandomThing(int operation)
+		{
+			if (operation == 0)
+				addUnit ();
+			else if (operation == 1)
+				exchangeUnits ();
+			else
+				removeUnit ();
 		}
 
-		public void addItemToSolution(Item i) {
-			this.items.add(i);
+		private void addUnit ()
+		{
+			Random rnd = new Random ();
+			items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1));
+			lastMove.setToAdding (items.Count);
 		}
 
-		private Integer getKnifeChanges() {
-			Integer knifeChanges = 0;
-			for (Integer i=0;i<items.size()-1;i++) {
-				if (itemsHaveDifferentLength(items.get(i), items.get(i+1)))
-					knifeChanges++;
+		private void exchangeUnits()
+		{
+			bool drawnUnitsOfTheSameType = true;
+			Random rnd = new Random ();
+
+			int indexA = rnd.Next(0, items.Count - 1);
+			int indexB = rnd.Next(0, items.Count - 1);
+			int endlessLoopPrevention = 0;
+
+			while (drawnUnitsOfTheSameType) {
+				if (items [indexA] != items [indexB])
+					drawnUnitsOfTheSameType = false;
+				if (endlessLoopPrevention > 1000)
+					drawnUnitsOfTheSameType = false;
+				endlessLoopPrevention++;
 			}
-			return knifeChanges;
+			// swap elements
+			unit_type temp = items [indexA];
+			items [indexA] = items [indexB];
+			items [indexB] = temp;
+
+			lastMove.setToExchange (indexA, indexB);
 		}
 
-		private Boolean itemsHaveDifferentLength(Item a, Item b) {
-			return Math.abs(a.getLength() - b.getLength()) > 0.05;
+		private void removeUnit()
+		{
+			Random rnd = new Random ();
+			int index = rnd.Next (0, items.Count - 1);
+			items.RemoveAt(index);
+			lastMove.setToDelete (index);
+
 		}
 
-		public Boolean itemsAtIndexesHaveDifferentLength(Integer a, Integer b) {
-			if (a >= items.size() || b >= items.size())
-				return false;
-			return itemsHaveDifferentLength(items.get(a), items.get(b));
+		public int getItemsQuantity()
+		{
+			return items.Count;
 		}
-
-		public QualityOfSolution quality(Double length, Double knifeWidth) {
-			QualityOfSolution qos = new QualityOfSolution();
-			List<StockBar> bars = distributeToBars(length, knifeWidth);
-			Double usedLength = 0.0;
-
-			for(StockBar b : bars)
-				usedLength += b.getUsedLength();
-
-			Double accordingToPlan = 0.0;
-			for(int i=0; i<items.size(); i++) {
-				Item item = items.get(i);
-				accordingToPlan += item.getDaysToDeliveryDate() * ((items.size()-i));
-			}
-
-			qos.setLeftoversPercentage( 1 - (usedLength / (bars.size() * length)) );
-			qos.setKnifeChanges(getKnifeChanges());
-			qos.setAccordingToPlan(accordingToPlan);
-			return qos;
-		}
-
-
-		private List<StockBar> distributeToBars(Double barLength, Double knifeWidth) {
-			Boolean itemsNotDistributed = true;
-			Integer itemId = 0;
-			List<StockBar> bars = new ArrayList<StockBar>();
-
-			StockBar bar = new StockBar(barLength, knifeWidth);
-			while(itemsNotDistributed) {
-				try {
-					bar.addItemToStock(items.get(itemId));
-					if (itemId == items.size()-1) {
-						itemsNotDistributed = false;
-					}
-					itemId++;
-				} catch (LongerThanStock e) {
-					bars.add(bar);
-					bar = new StockBar(barLength, knifeWidth);
-				}
-			}
-			bars.add(bar);
-			return bars;
+		public List<unit_type> getEnums()
+		{
+			return items;
 		}
 	}
 }
