@@ -62,6 +62,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 			}
 			tabuList.addToTabuList(nextSolution.lastMove);
 			Console.WriteLine ("local best: " + localBestValue + "local best TL: " + localBestTLValue + ", best: " + bestSolutionValue);
+			nextSolution.printSolution ();
 			return nextSolution;
 		}
 

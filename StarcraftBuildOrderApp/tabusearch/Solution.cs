@@ -91,6 +91,14 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			return items;
 		}
+
+		public void printSolution() {
+			string s = "[ ";
+			for (int i = 0; i < items.Count; i++) {
+				s += (int)items [i] + " ";
+			}
+			Console.WriteLine (s + " ]"); 
+		}
 	}
 }
 
