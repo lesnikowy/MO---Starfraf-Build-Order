@@ -1,0 +1,5 @@
+/Users/mateuszknapik/Dropbox/Studia/MO/StarcraftBuildOrderApp/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/mateuszknapik/Dropbox/Studia/MO/StarcraftBuildOrderApp/bin/Debug/StarcraftBuildOrderApp.exe.mdb
+/Users/mateuszknapik/Dropbox/Studia/MO/StarcraftBuildOrderApp/bin/Debug/StarcraftBuildOrderApp.exe
+/Users/mateuszknapik/Dropbox/Studia/MO/StarcraftBuildOrderApp/obj/x86/Debug/StarcraftBuildOrderApp.exe
+/Users/mateuszknapik/Dropbox/Studia/MO/StarcraftBuildOrderApp/obj/x86/Debug/StarcraftBuildOrderApp.exe.mdb

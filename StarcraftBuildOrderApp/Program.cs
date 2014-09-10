@@ -16,9 +16,9 @@ namespace StarcraftBuildOrderApp
             float score;
             // do not include starting units: SCVs and Command Center
             
-			TabuSearch tabu = new TabuSearch (30, 50, new Solution ());
+			TabuSearch tabu = new TabuSearch (10, 50, new Solution ());
 			Solution s = tabu.iterate (tabu.bestSolution);
-			for (int i = 0; i < 5000; i++) {
+			for (int i = 0; i < 500; i++) {
 				s = tabu.iterate (s);
 			}
 
