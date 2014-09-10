@@ -39,8 +39,10 @@ namespace StarcraftBuildOrderApp.tabusearch
 				addUnit ();
 			else if (operation > 1 && operation < 20)
 				exchangeUnits ();
-			else
-				removeUnit ();
+			else {
+				if (items.Count > 2)
+					removeUnit ();
+			}
 		}
 
 		private void addUnit ()
