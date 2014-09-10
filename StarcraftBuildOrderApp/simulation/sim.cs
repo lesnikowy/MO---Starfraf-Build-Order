@@ -76,7 +76,7 @@ namespace StarcraftBuildOrderApp.simulation
 //            Logger.Log.Write("***************************");
 //            Logger.Log.Write("Input build order:");
             for (int i = 0; i < unit_list.Count; i++) {
-                Console.WriteLine( " " + (i+1) + " " + unit_list[i].name);
+//                Console.WriteLine( " " + (i+1) + " " + unit_list[i].name);
             }
 //            Logger.Log.Write("***************************");
         }

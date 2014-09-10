@@ -11,21 +11,21 @@ namespace StarcraftBuildOrderApp.simulation
 
         // ground units
         SCV = 1,
-        MARINE,
-        FIREBAT,
-        GHOST,
-        VULTURE,
-        TANK,
-        GOLIATH,
+        MARINE = 2,
+        FIREBAT = 3,
+        GHOST = 4,
+        VULTURE = 5,
+        TANK = 6,
+        GOLIATH = 7,
 
         // buildings
-        CMD_CENTER,
-        SUPPLY_DEPOT,
-        BARRACKS,
-        ACADEMY,
-        FACTORY,
-        MACHINE_SHOP,
-        ARMORY,
+        CMD_CENTER = 8,
+        SUPPLY_DEPOT = 9,
+        BARRACKS = 10,
+        ACADEMY = 11,
+        FACTORY = 12,
+        MACHINE_SHOP = 13,
+        ARMORY = 14,
 
         UNIT_TYPE_SIZE
     };
