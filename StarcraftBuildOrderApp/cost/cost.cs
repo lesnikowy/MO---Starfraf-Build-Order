@@ -90,7 +90,7 @@ namespace StarcraftBuildOrderApp.cost_calc
                 }
                 else
                 {
-                    return (float)(fulfillment) * (float)(100.0) + (float)(illegal_unit_cnt)*(float)(10000.0);
+                    return (float)(fulfillment) * (float)(1000.0) + (float)(illegal_unit_cnt)*(float)(10000.0);
                 }
             
             
