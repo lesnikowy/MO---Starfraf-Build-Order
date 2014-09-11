@@ -66,7 +66,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 				indexB = rnd.Next(0, items.Count - 1);
 				if (items [indexA] != items [indexB])
 					drawnUnitsOfTheSameType = false;
-				if (endlessLoopPrevention > 1000)
+				if (endlessLoopPrevention > 3)
 					drawnUnitsOfTheSameType = false;
 				endlessLoopPrevention++;
 			}
