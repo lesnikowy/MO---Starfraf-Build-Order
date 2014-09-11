@@ -17,6 +17,7 @@ namespace StarcraftBuildOrderApp
             // do not include starting units: SCVs and Command Center
 
             cost.build_req.Add(unit_type.MARINE);
+			cost.build_req.Add (unit_type.FIREBAT);
 
 			TabuSearch tabu = new TabuSearch (10, 50, new Solution ());
 			Solution s = tabu.iterate (tabu.bestSolution);
@@ -29,7 +30,7 @@ namespace StarcraftBuildOrderApp
 
 
 			Console.WriteLine ("KONIEC");
-            Console.ReadKey();
+//            Console.ReadKey();
         }
     }
 }

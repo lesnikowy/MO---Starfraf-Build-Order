@@ -25,8 +25,10 @@ namespace StarcraftBuildOrderApp.tabusearch
 				TabuListItem item = tabulist [i];
 				if (item.retention > 1)
 					item.retention--;
-				else
-					tabulist.RemoveAt(i); i--;
+				else {
+					tabulist.RemoveAt (i);
+					i--;
+				}
 			}
 		}
 
@@ -35,8 +37,10 @@ namespace StarcraftBuildOrderApp.tabusearch
 			if (isOnTabooList (item)) {
 				int index = tabulist.IndexOf (item);
 				tabulist [index].retention = retention;
-			} else
+			} else {
+				item.retention = retention;
 				tabulist.Add (item);
+			}
 		}
 			
 	}
