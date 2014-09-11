@@ -99,7 +99,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		public void printSolution() {
 			string s = "[ ";
 			for (int i = 0; i < items.Count; i++) {
-				s += (int)items [i] + " ";
+				s += items[i].ToString() + " ";
 			}
 			Console.WriteLine (s + " ]"); 
 		}
