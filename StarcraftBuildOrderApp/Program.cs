@@ -19,7 +19,7 @@ namespace StarcraftBuildOrderApp
             cost.build_req.Add(unit_type.MARINE);
 			cost.build_req.Add (unit_type.FIREBAT);
 
-			TabuSearch tabu = new TabuSearch (10, 50, new Solution ());
+			TabuSearch tabu = new TabuSearch (10, 10, new Solution ());
 			Solution s = tabu.iterate (tabu.bestSolution);
 			for (int i = 0; i < 500; i++) {
 				s = tabu.iterate (s);
