@@ -40,8 +40,9 @@ namespace StarcraftBuildOrderApp.tabusearch
 		}
 
 		public void setToAdding(int index) {
-			type = ItemType.ADDING;
-			indexA = index;
+			this.type = ItemType.ADDING;
+			this.indexA = index;
+			this.indexB = index;
 		}
 
 		public void setToExchange(int indexA, int indexB)
@@ -60,6 +61,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			this.type = ItemType.DELETE;
 			this.indexA = index;
+			this.indexB = index;
 		}
 
 		public override bool Equals(System.Object obj)

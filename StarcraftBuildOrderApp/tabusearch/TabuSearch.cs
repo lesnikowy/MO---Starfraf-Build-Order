@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StarcraftBuildOrderApp.cost_calc;
 
 namespace StarcraftBuildOrderApp.tabusearch
@@ -23,7 +24,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 
 		public Solution iterate(Solution solution)
 		{
-			Solution[] neighbours = createNeighbours(solution);
+			List<Solution> neighbours = createNeighbours(solution);
 			Solution localBest = null;
 			float localBestValue = float.MaxValue;
 			Solution localBestTL = null;
@@ -32,21 +33,20 @@ namespace StarcraftBuildOrderApp.tabusearch
 			Solution nextSolution = null;
 
 			// Find lowest cost neighbours
-			for(int i=0;i<howManyNeighbours;i++)
+			for(int i=0;i<neighbours.Count;i++)
 			{
 				Solution nb = neighbours[i];
 				float value = evaluateSolution(nb);
-				if (tabuList.isOnTabooList(nb.lastMove)) {
+				/* if (tabuList.isOnTabooList(nb.lastMove)) {
 					if (value < localBestTLValue) {
 						localBestTL = nb;
 						localBestTLValue = value;
 					}
-				} else {
-					if (value < localBestValue) {
-						localBest = nb;
-						localBestValue = value;
-					}
-				}	
+				} else { */
+				if (value < localBestValue) {
+					localBest = nb;
+					localBestValue = value;
+				}
 			}
 			// Update TL
 			tabuList.clearOldMoves();
@@ -66,19 +66,24 @@ namespace StarcraftBuildOrderApp.tabusearch
 			return nextSolution;
 		}
 
-		private Solution[] createNeighbours(Solution solution)
+		private List<Solution> createNeighbours(Solution solution)
 		{
-			Solution[] neighbours = new Solution[howManyNeighbours];
+			List<Solution> neighbours = new List<Solution>();
 			Random rnd = new Random();
+			int endlessLoopPrevention = 0;
 
 			for(int i=0;i<howManyNeighbours;i++) {
 				Solution newNeighbour = new Solution(solution);
 				int randomOperation = rnd.Next (0, 6);
 
 				newNeighbour.doRandomThing (randomOperation);
-				neighbours[i] = newNeighbour;
-				if (tabuList.isOnTabooList (newNeighbour.lastMove))
+				neighbours.Add(newNeighbour);
+				if (tabuList.isOnTabooList (newNeighbour.lastMove)) {
 					i--;
+					if (endlessLoopPrevention > 5)
+						return neighbours;
+				}
+				endlessLoopPrevention++;
 			}
 			return neighbours;
 		}
