@@ -30,7 +30,7 @@ namespace StarcraftBuildOrderApp
 
 
 			Console.WriteLine ("KONIEC");
-//            Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }
