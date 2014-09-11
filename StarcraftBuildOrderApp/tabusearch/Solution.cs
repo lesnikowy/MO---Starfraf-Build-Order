@@ -57,11 +57,13 @@ namespace StarcraftBuildOrderApp.tabusearch
 			bool drawnUnitsOfTheSameType = true;
 			Random rnd = new Random ();
 
-			int indexA = rnd.Next(0, items.Count - 1);
-			int indexB = rnd.Next(0, items.Count - 1);
+			int indexA = 0;
+			int indexB = 0;
 			int endlessLoopPrevention = 0;
 
 			while (drawnUnitsOfTheSameType) {
+				indexA = rnd.Next(0, items.Count - 1);
+				indexB = rnd.Next(0, items.Count - 1);
 				if (items [indexA] != items [indexB])
 					drawnUnitsOfTheSameType = false;
 				if (endlessLoopPrevention > 1000)
