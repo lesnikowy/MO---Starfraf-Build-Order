@@ -78,7 +78,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 
 				newNeighbour.doRandomThing (randomOperation);
 				neighbours.Add(newNeighbour);
-				if (tabuList.isOnTabooList (newNeighbour.lastMove)) {
+				if (tabuList.isOnTabooList (newNeighbour.lastMove) > 0) {
 					i--;
 					if (endlessLoopPrevention > 5)
 						return neighbours;

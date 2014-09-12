@@ -15,7 +15,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 			this.retention = retention;
 		}
 			
-		public Boolean isOnTabooList(TabuListItem item) {
+		public int isOnTabooList(TabuListItem item) {
 			for(int i=0;i<tabulist.Count;i++)
 			{
 				TabuListItem temp = tabulist [i];
@@ -23,22 +23,22 @@ namespace StarcraftBuildOrderApp.tabusearch
 					if (temp.type == ItemType.DELETE
 					    	&& temp.unitA == item.unitA
 					    		&& temp.indexA == item.indexA)
-						return true;
+						return i;
 				} else if (item.type == ItemType.DELETE) {
 					if (temp.type == ItemType.ADDING
 						&& temp.unitA == item.unitA
 							&& temp.indexA == item.indexA)
-						return true;
+						return i;
 				} else {
 					if (temp.type == ItemType.EXCHANGE
 						&& temp.unitA == item.unitA
 							&& temp.indexA == item.indexA
 								&& temp.unitB == item.unitB
 								&& temp.indexB == item.indexB)
-						return true;
+						return i;
 				}
 			}
-			return false;
+			return -1;
 		}
 
 		public void clearOldMoves()
@@ -56,9 +56,10 @@ namespace StarcraftBuildOrderApp.tabusearch
 
 		public void addToTabuList(TabuListItem item)
 		{
-			if (isOnTabooList (item)) {
-				int index = tabulist.IndexOf (item);
-				tabulist [index].retention = retention;
+			int itemIndex = -1;
+			// Yes, this if really should look like that
+			if ((itemIndex = isOnTabooList (item)) > 0) {
+				tabulist [itemIndex].retention = retention;
 			} else {
 				item.retention = retention;
 				tabulist.Add (item);
