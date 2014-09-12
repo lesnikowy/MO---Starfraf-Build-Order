@@ -28,7 +28,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 			Random rnd = new Random ();
 			int howManyUnits = rnd.Next (2, MAXIMUM_UNITS_IN_RANDOM_SOLUTION);
 			for (int i = 2; i < howManyUnits; i++) {
-				items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1));
+				items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE));
 			}
 			return this;
 		}
@@ -37,7 +37,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			if (operation == 0)
 				addUnit ();
-			else if (operation > 1 && operation < 4)
+			else if (operation > 0 && operation < 4)
 				exchangeUnits ();
 			else {
 				if (items.Count > 2)
@@ -48,7 +48,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		private void addUnit ()
 		{
 			Random rnd = new Random ();
-			unit_type unit = (unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1);
+			unit_type unit = (unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE);
 			items.Add (unit);
 			lastMove.setToAdding (items.Count, unit);
 		}
@@ -63,11 +63,11 @@ namespace StarcraftBuildOrderApp.tabusearch
 			int endlessLoopPrevention = 0;
 
 			while (drawnUnitsOfTheSameType) {
-				indexA = rnd.Next(0, items.Count - 1);
-				indexB = rnd.Next(0, items.Count - 1);
+				indexA = rnd.Next(0, items.Count);
+				indexB = rnd.Next(0, items.Count);
 				if (items [indexA] != items [indexB])
 					drawnUnitsOfTheSameType = false;
-				if (endlessLoopPrevention > 3)
+				if (endlessLoopPrevention > 10)
 					drawnUnitsOfTheSameType = false;
 				endlessLoopPrevention++;
 			}
@@ -82,7 +82,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		private void removeUnit()
 		{
 			Random rnd = new Random ();
-			int index = rnd.Next (0, items.Count - 1);
+			int index = rnd.Next (0, items.Count);
 			unit_type unit = items [index];
 			items.RemoveAt(index);
 			lastMove.setToDelete (index, unit);
