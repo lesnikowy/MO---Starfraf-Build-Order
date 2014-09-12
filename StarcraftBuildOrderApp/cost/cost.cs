@@ -84,9 +84,9 @@ namespace StarcraftBuildOrderApp.cost_calc
 
                 //##############################################################
                 // check timing
-            if (fulfillment == 0 && illegal_unit_cnt == 0)
+            if ( illegal_unit_cnt == 0)
                 {
-                    return (float)(sim_unit.run(unit_list));
+                    return (float)(sim_unit.run(unit_list)) + (float)(fulfillment) * (float)(1000.0);
                 }
                 else
                 {
