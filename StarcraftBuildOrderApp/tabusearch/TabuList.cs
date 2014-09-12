@@ -15,8 +15,30 @@ namespace StarcraftBuildOrderApp.tabusearch
 			this.retention = retention;
 		}
 			
-		public Boolean isOnTabooList(TabuListItem i) {
-			return tabulist.Contains (i);
+		public Boolean isOnTabooList(TabuListItem item) {
+			for(int i=0;i<tabulist.Count;i++)
+			{
+				TabuListItem temp = tabulist [i];
+				if (item.type == ItemType.ADDING) {
+					if (temp.type == ItemType.DELETE
+					    	&& temp.unitA == item.unitA
+					    		&& temp.indexA == item.indexA)
+						return true;
+				} else if (item.type == ItemType.DELETE) {
+					if (temp.type == ItemType.ADDING
+						&& temp.unitA == item.unitA
+							&& temp.indexA == item.indexA)
+						return true;
+				} else {
+					if (temp.type == ItemType.EXCHANGE
+						&& temp.unitA == item.unitA
+							&& temp.indexA == item.indexA
+								&& temp.unitB == item.unitB
+								&& temp.indexB == item.indexB)
+						return true;
+				}
+			}
+			return false;
 		}
 
 		public void clearOldMoves()

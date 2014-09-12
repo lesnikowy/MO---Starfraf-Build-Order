@@ -26,8 +26,8 @@ namespace StarcraftBuildOrderApp.tabusearch
 		public Solution createRandomSolution()
 		{
 			Random rnd = new Random ();
-			int howManyUnits = rnd.Next (0, MAXIMUM_UNITS_IN_RANDOM_SOLUTION);
-			for (int i = 0; i < howManyUnits; i++) {
+			int howManyUnits = rnd.Next (2, MAXIMUM_UNITS_IN_RANDOM_SOLUTION);
+			for (int i = 2; i < howManyUnits; i++) {
 				items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1));
 			}
 			return this;
@@ -37,7 +37,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			if (operation == 0)
 				addUnit ();
-			else if (operation > 1 && operation < 5)
+			else if (operation > 1 && operation < 4)
 				exchangeUnits ();
 			else {
 				if (items.Count > 2)
@@ -48,8 +48,9 @@ namespace StarcraftBuildOrderApp.tabusearch
 		private void addUnit ()
 		{
 			Random rnd = new Random ();
-			items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1));
-			lastMove.setToAdding (items.Count);
+			unit_type unit = (unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE - 1);
+			items.Add (unit);
+			lastMove.setToAdding (items.Count, unit);
 		}
 
 		private void exchangeUnits()
@@ -75,15 +76,16 @@ namespace StarcraftBuildOrderApp.tabusearch
 			items [indexA] = items [indexB];
 			items [indexB] = temp;
 
-			lastMove.setToExchange (indexA, indexB);
+			lastMove.setToExchange (indexA, items [indexA], indexB, items [indexB]);
 		}
 
 		private void removeUnit()
 		{
 			Random rnd = new Random ();
 			int index = rnd.Next (0, items.Count - 1);
+			unit_type unit = items [index];
 			items.RemoveAt(index);
-			lastMove.setToDelete (index);
+			lastMove.setToDelete (index, unit);
 
 		}
 
