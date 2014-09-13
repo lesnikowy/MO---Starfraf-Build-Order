@@ -35,24 +35,31 @@ namespace StarcraftBuildOrderApp
                 cost.add_build_req(unit_type.MARINE);
                 cost.add_build_req(unit_type.GOLIATH);
                 cost.add_build_req(unit_type.GOLIATH);
-                cost.add_build_req(unit_type.GOLIATH);
+                cost.add_build_req(unit_type.TANK);
 
                 cost.add_req_unit();
 
-                 /*List<unit_type> tmp = new List<unit_type>();
+                /* List<unit_type> tmp = new List<unit_type>();
 
-                 tmp.Add(unit_type.CMD_CENTER);
+                
                   tmp.Add(unit_type.BARRACKS);
                
                   tmp.Add(unit_type.FACTORY);
-                
-                  tmp.Add(unit_type.SUPPLY_DEPOT);
-                
+                  tmp.Add(unit_type.SCV);
                   tmp.Add(unit_type.MARINE);
+                  tmp.Add(unit_type.SCV);
                   tmp.Add(unit_type.ARMORY);
+                  tmp.Add(unit_type.SUPPLY_DEPOT);
+                  tmp.Add(unit_type.MACHINE_SHOP);
                   tmp.Add(unit_type.MARINE);
-                  tmp.Add(unit_type.MARINE);
+                  tmp.Add(unit_type.TANK);
                   tmp.Add(unit_type.GOLIATH);
+                  tmp.Add(unit_type.GOLIATH);
+                  tmp.Add(unit_type.SCV);
+                  tmp.Add(unit_type.SUPPLY_DEPOT);
+                  tmp.Add(unit_type.SCV);
+                  tmp.Add(unit_type.MARINE);
+
 
                   float ss = cost.calc(tmp); 
           
