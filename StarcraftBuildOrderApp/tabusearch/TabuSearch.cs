@@ -45,6 +45,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 				} else { */
 				if (value < localBestValue) {
 					localBest = nb;
+                    localBest.cost = value;
 					localBestValue = value;
 				}
 			}
@@ -61,8 +62,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 				bestSolutionValue = localBestTLValue;
 			}
 			tabuList.addToTabuList(nextSolution.lastMove);
-			Console.WriteLine ("local best: " + localBestValue + "local best TL: " + localBestTLValue + ", best: " + bestSolutionValue);
-			nextSolution.printSolution ();
+			
 			return nextSolution;
 		}
 

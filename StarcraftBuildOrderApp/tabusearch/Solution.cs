@@ -8,6 +8,8 @@ namespace StarcraftBuildOrderApp.tabusearch
 	{
 		private List<unit_type> items;
 		public TabuListItem lastMove;
+        public float cost;
+
 		private const int MAXIMUM_UNITS_IN_RANDOM_SOLUTION = 10;
 
 		public Solution()
