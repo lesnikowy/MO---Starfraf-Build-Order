@@ -79,8 +79,16 @@ namespace StarcraftBuildOrderApp.cost_calc
 
                 for (int i = 0; i < build_req_unit_count.Count(); i++)
                 {
-                    if(build_req_unit_count[i] != 0) {
+                    if (build_req_unit_count[i] != 0)
+                    {
                         fulfillment += Math.Abs(build_req_unit_count[i] - build_unit_count[i]);
+                    }
+                    else
+                    {
+                        if ((unit_type)(i) != unit_type.SCV && (unit_type)(i) != unit_type.SUPPLY_DEPOT) 
+                        {
+                            fulfillment += build_unit_count[i];
+                        }
                     }
                 }
             }

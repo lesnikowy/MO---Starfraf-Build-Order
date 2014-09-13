@@ -34,25 +34,27 @@ namespace StarcraftBuildOrderApp
                 cost.add_build_req(unit_type.MARINE);
                 cost.add_build_req(unit_type.MARINE);
                 cost.add_build_req(unit_type.GOLIATH);
+                cost.add_build_req(unit_type.GOLIATH);
+                cost.add_build_req(unit_type.GOLIATH);
 
                 cost.add_req_unit();
 
-                /*  List<unit_type> tmp = new List<unit_type>();
-                
-                  tmp.Add(unit_type.SCV);
+                 /*List<unit_type> tmp = new List<unit_type>();
+
+                 tmp.Add(unit_type.CMD_CENTER);
                   tmp.Add(unit_type.BARRACKS);
                
-                  tmp.Add(unit_type.MARINE);
-                
-                  tmp.Add(unit_type.CMD_CENTER);
+                  tmp.Add(unit_type.FACTORY);
                 
                   tmp.Add(unit_type.SUPPLY_DEPOT);
-                  tmp.Add(unit_type.ACADEMY);
+                
                   tmp.Add(unit_type.MARINE);
-                  tmp.Add(unit_type.SCV);
-                  tmp.Add(unit_type.GHOST);
+                  tmp.Add(unit_type.ARMORY);
+                  tmp.Add(unit_type.MARINE);
+                  tmp.Add(unit_type.MARINE);
+                  tmp.Add(unit_type.GOLIATH);
 
-                  float ss = cost.calc(tmp);
+                  float ss = cost.calc(tmp); 
           
                   return;   */
 
@@ -72,13 +74,13 @@ namespace StarcraftBuildOrderApp
 
                     outfile.WriteLine(s.cost + ";" + tabu.bestSolutionValue);
 
-                    if (tabu.bestSolutionValue < 1000)
+                   /* if (tabu.bestSolutionValue < 1000)
                     {
                         good_solution_counter++;
-                    }
+                    } */
                     total_counter++;
 
-                    if (total_counter > 1000000 | good_solution_counter > 10000)
+                    if (total_counter > 100000 | good_solution_counter > 10000)
                     {
                         break;
                     }
