@@ -65,7 +65,8 @@ namespace StarcraftBuildOrderApp
           
                   return;   */
 
-                TabuSearch tabu = new TabuSearch(10, 10, new Solution());
+                TabuSearch tabu = new TabuSearch(10, 10, new Solution(20));
+				tabu.setOperationsProbability (10, 80, 10);
                 Solution s = tabu.iterate(tabu.bestSolution);
 
 

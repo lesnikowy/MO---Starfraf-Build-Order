@@ -12,9 +12,16 @@ namespace StarcraftBuildOrderApp.tabusearch
 		public Solution bestSolution;
 		public float bestSolutionValue;
 
+		private int addProbability;
+		private int exchangeProbability;
+		private int deleteProbability;
+
 		public TabuSearch (int howManyNeighbours, int retention, Solution seed)
 		{
 			this.howManyNeighbours = howManyNeighbours;
+			this.addProbability = 20;
+			this.exchangeProbability = 60;
+			this.deleteProbability = 20;
 			tabuList = new TabuList (retention);
 			bestSolution = seed;
 			bestSolutionValue = evaluateSolution (seed);
@@ -66,6 +73,15 @@ namespace StarcraftBuildOrderApp.tabusearch
 			return nextSolution;
 		}
 
+		public void setOperationsProbability(int addProbability,
+												int exchangeProbability,
+													int deleteProbability)
+		{
+			this.addProbability = addProbability;
+			this.exchangeProbability = exchangeProbability;
+			this.deleteProbability = deleteProbability;
+		}
+
 		private List<Solution> createNeighbours(Solution solution)
 		{
 			List<Solution> neighbours = new List<Solution>();
@@ -74,14 +90,22 @@ namespace StarcraftBuildOrderApp.tabusearch
 
 			for(int i=0;i<howManyNeighbours;i++) {
 				Solution newNeighbour = new Solution(solution);
-				int randomOperation = rnd.Next (0, 5);
+				int randomOperation = rnd.Next (0, 100);
 
                 if (solution.getItemsQuantity() <= 2)
                 {
                     randomOperation = 0;
                 }
 
-				newNeighbour.doRandomThing (randomOperation);
+				if (randomOperation < addProbability)
+					newNeighbour.addUnit ();
+				else if (randomOperation < (addProbability + exchangeProbability))
+					newNeighbour.exchangeUnits ();
+				else {
+					if (newNeighbour.getItemsQuantity() > 2)
+						newNeighbour.removeUnit ();
+				}
+
 				neighbours.Add (newNeighbour);
 				if (tabuList.isOnTabooList (newNeighbour.lastMove) > 0) {
 					if (endlessLoopPrevention > 5) {
