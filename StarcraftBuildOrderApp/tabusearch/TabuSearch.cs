@@ -76,7 +76,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 				Solution newNeighbour = new Solution(solution);
 				int randomOperation = rnd.Next (0, 5);
 
-                if (solution.getItemsQuantity() == 2)
+                if (solution.getItemsQuantity() <= 2)
                 {
                     randomOperation = 0;
                 }

@@ -13,10 +13,15 @@ namespace StarcraftBuildOrderApp
         static void Main(string[] args)
         {
             
-            float score;
-            // do not include starting units: SCVs and Command Center
+
+            //initialize cost module
+
+            cost.fullfill_coef = (float)(1000);
+            cost.illegal_coef = (float)(10000);
+            cost.ovrload_coef = (float)(10000);
+         
+
             cost.build_req.Add(unit_type.SUPPLY_DEPOT);
-            //cost.build_req.Add(unit_type.SCV);
             cost.build_req.Add(unit_type.MARINE);
             cost.build_req.Add(unit_type.MARINE);
             cost.build_req.Add(unit_type.MARINE);

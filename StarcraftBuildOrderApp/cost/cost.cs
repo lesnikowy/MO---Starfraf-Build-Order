@@ -10,6 +10,9 @@ namespace StarcraftBuildOrderApp.cost_calc
     {
 
         public static List<unit_type> build_req = new List<unit_type>();
+        public static float fullfill_coef;
+        public static float illegal_coef;
+        public static float ovrload_coef;
 
 
         private static List<unit> unit_list = new List<unit>();
@@ -51,14 +54,17 @@ namespace StarcraftBuildOrderApp.cost_calc
             //##############################################################
             // check correctness of build order 
 
-
-
             int illegal_unit_cnt = 0;
+            uint total_supply = 0;
+            uint used_supply = 0;
+            uint supply_overload = 0;
 
             build_unit_list(raw_unit_vector);
 
             for (int i = 1; i < unit_list.Count() ; i++)
             {
+                used_supply += unit_list[i].supply_usage;
+                total_supply += unit_list[i].supply;
                 
                 for (int req = 0; req < unit_list[i].requirements.Count(); req++ )
                 {
@@ -80,18 +86,36 @@ namespace StarcraftBuildOrderApp.cost_calc
                 }
             }
 
+            if (total_supply < used_supply)
+            {
+                supply_overload = used_supply - total_supply;
+            }
+            
 
 
-                //##############################################################
-                // check timing
-            if ( illegal_unit_cnt == 0)
+
+            //##############################################################
+            // calculate score
+            if (illegal_unit_cnt == 0 && supply_overload == 0)
+            {
+                float score = (float)(sim_unit.run(unit_list));
+
+                if (score == 0) //if simulator return 0, something wrong happend
                 {
-                    return (float)(sim_unit.run(unit_list)) + (float)(fulfillment) * (float)(1000.0);
+                    return float.MaxValue;
                 }
                 else
                 {
-                    return (float)(fulfillment) * (float)(1000.0) + (float)(illegal_unit_cnt)*(float)(10000.0);
+                    return (float)(fulfillment) * fullfill_coef + score; 
                 }
+                    
+                     
+            }
+            else
+            {
+
+                return (float)(fulfillment) * fullfill_coef + (float)(illegal_unit_cnt) * illegal_coef + (float)(supply_overload) * ovrload_coef;
+            }
             
             
         }
