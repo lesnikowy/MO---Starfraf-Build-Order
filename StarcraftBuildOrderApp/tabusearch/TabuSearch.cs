@@ -49,6 +49,8 @@ namespace StarcraftBuildOrderApp.tabusearch
 			}
 			// Update TL
 			tabuList.clearOldMoves();
+			if (localBest == null)
+				localBest = neighbours [0];
 			nextSolution = localBest;
 
 			// Choose best solution
