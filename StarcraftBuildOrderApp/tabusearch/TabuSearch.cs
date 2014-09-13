@@ -74,7 +74,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 
 			for(int i=0;i<howManyNeighbours;i++) {
 				Solution newNeighbour = new Solution(solution);
-				int randomOperation = rnd.Next (0, 4);
+				int randomOperation = rnd.Next (0, 5);
 
 				newNeighbour.doRandomThing (randomOperation);
 				neighbours.Add (newNeighbour);
