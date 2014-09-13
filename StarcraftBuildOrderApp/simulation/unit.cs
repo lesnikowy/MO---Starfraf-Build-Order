@@ -215,7 +215,7 @@ namespace StarcraftBuildOrderApp.simulation
                         requirements.Add(unit_type.BARRACKS);
                         break;
                     case unit_type.FACTORY:
-                        name = "Supply Depot";
+                        name = "Factory";
                         cost = 150;
                         bld_time = 60;
                         supply_usage = 0;
@@ -228,7 +228,7 @@ namespace StarcraftBuildOrderApp.simulation
                         requirements.Add(unit_type.BARRACKS);
                         break;
                     case unit_type.MACHINE_SHOP:
-                        name = "Supply Depot";
+                        name = "Machine sho[";
                         cost = 75;
                         bld_time = 45;
                         supply_usage = 0;

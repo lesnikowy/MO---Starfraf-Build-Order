@@ -9,32 +9,67 @@ namespace StarcraftBuildOrderApp.cost_calc
     static class cost
     {
 
-        public static List<unit_type> build_req = new List<unit_type>();
+       // public static List<unit_type> build_req = new List<unit_type>();
         public static float fullfill_coef;
         public static float illegal_coef;
         public static float ovrload_coef;
 
 
+        private static int[] build_req_unit_count = new int[(int)(unit_type.UNIT_TYPE_SIZE)];
+
         private static List<unit> unit_list = new List<unit>();
+        private static List<unit> req_unit_list = new List<unit>();
+
+        public static void add_build_req(unit_type unit_t)
+        {
+
+            unit tmp_unit = new unit(unit_t, false);
+            req_unit_list.Add(tmp_unit);
+
+
+
+
+            build_req_unit_count[(int)(unit_t)]++;
+
+
+
+           
+        }
+
+        public static void add_req_unit()  
+        {
+            int cout = req_unit_list.Count();
+
+            for (int i = 0; i < cout; i++)
+            {
+                for (int j = 0; j < req_unit_list[i].requirements.Count(); j++)
+                {
+                    if (build_req_unit_count[(int)(req_unit_list[i].requirements[j])] == 0 && req_unit_list[i].requirements[j] != unit_type.CMD_CENTER && req_unit_list[i].requirements[j] != unit_type.SCV)
+                    {
+                        build_req_unit_count[(int)(req_unit_list[i].requirements[j])]++;
+                        req_unit_list.Add(new unit(req_unit_list[i].requirements[j], false));
+                    }
+                }
+            }
+        }
+
 
         public static float calc(List<unit_type> raw_unit_vector)
         {
 
             sim sim_unit = new sim();
 
+            unit_list = build_unit_list(raw_unit_vector);
 
             //##############################################################
             // check fulfillment of requirements
             int fulfillment = 0;
-            if (build_req.Count != 0)
+            if (req_unit_list.Count != 0)
             {
-                int[] build_req_unit_count = new int[(int)(unit_type.UNIT_TYPE_SIZE)];
+                
                 int[] build_unit_count = new int[(int)(unit_type.UNIT_TYPE_SIZE)];
 
-                for (int i = 0; i < build_req.Count(); i++ )
-                {
-                    build_req_unit_count[(int)(build_req[i])]++;
-                }
+                
 
                 for (int i = 0; i < raw_unit_vector.Count(); i++)
                 {
@@ -59,7 +94,7 @@ namespace StarcraftBuildOrderApp.cost_calc
             uint used_supply = 0;
             uint supply_overload = 0;
 
-            build_unit_list(raw_unit_vector);
+           
 
             for (int i = 1; i < unit_list.Count() ; i++)
             {
@@ -121,9 +156,9 @@ namespace StarcraftBuildOrderApp.cost_calc
         }
 
 
-        private static void build_unit_list(List<unit_type> raw_unit_vector)
+        private static List<unit> build_unit_list(List<unit_type> raw_unit_vector)
         {
-            unit_list.Clear();
+            List<unit> unit_list = new List<unit>();
 
             // start with 4 SCV and one CMD_CENTER
             unit_list.Add(new unit(unit_type.CMD_CENTER, true));
@@ -137,6 +172,8 @@ namespace StarcraftBuildOrderApp.cost_calc
             {
                 unit_list.Add(new unit(raw_unit_vector[i], false));
             }
+
+            return unit_list;
         }
 
     }

@@ -29,13 +29,13 @@ namespace StarcraftBuildOrderApp
 
 
 
-                cost.build_req.Add(unit_type.SUPPLY_DEPOT);
-                cost.build_req.Add(unit_type.MARINE);
-                cost.build_req.Add(unit_type.MARINE);
-                cost.build_req.Add(unit_type.MARINE);
-                //cost.build_req.Add(unit_type.GOLIATH);
+                cost.add_build_req(unit_type.SUPPLY_DEPOT);
+                cost.add_build_req(unit_type.MARINE);
+                cost.add_build_req(unit_type.MARINE);
+                cost.add_build_req(unit_type.MARINE);
+                cost.add_build_req(unit_type.GOLIATH);
 
-
+                cost.add_req_unit();
 
                 /*  List<unit_type> tmp = new List<unit_type>();
                 
@@ -78,7 +78,7 @@ namespace StarcraftBuildOrderApp
                     }
                     total_counter++;
 
-                    if (total_counter > 500000 | good_solution_counter > 1000)
+                    if (total_counter > 1000000 | good_solution_counter > 10000)
                     {
                         break;
                     }
