@@ -1,16 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="simulation/sim.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="tabusearch/TabuListItem.cs">
     <Files>
-      <File FileName="tabusearch/Solution.cs" Line="43" Column="43" />
-      <File FileName="tabusearch/TabuSearch.cs" Line="41" Column="41" />
-      <File FileName="tabusearch/TabuListItem.cs" Line="3" Column="3" />
-      <File FileName="Program.cs" Line="28" Column="28" />
-      <File FileName="simulation/sim.cs" Line="18" Column="18" />
-      <File FileName="simulation/sim_const.cs" Line="1" Column="1" />
-      <File FileName="cost/cost.cs" Line="1" Column="1" />
+      <File FileName="tabusearch/TabuListItem.cs" Line="1" Column="1" />
+      <File FileName="tabusearch/TabuSearch.cs" Line="1" Column="1" />
+      <File FileName="tabusearch/Solution.cs" Line="1" Column="1" />
       <File FileName="tabusearch/TabuList.cs" Line="1" Column="1" />
-      <File FileName="simulation/unit.cs" Line="1" Column="1" />
+      <File FileName="Program.cs" Line="1" Column="1" />
+      <File FileName="simulation/sim.cs" Line="26" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

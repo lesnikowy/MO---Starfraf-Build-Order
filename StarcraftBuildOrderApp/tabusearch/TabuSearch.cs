@@ -7,7 +7,6 @@ namespace StarcraftBuildOrderApp.tabusearch
 	public class TabuSearch
 	{
 		private int howManyNeighbours;
-		private int retention;
 		private TabuList tabuList;
 
 		public Solution bestSolution;
@@ -16,7 +15,6 @@ namespace StarcraftBuildOrderApp.tabusearch
 		public TabuSearch (int howManyNeighbours, int retention, Solution seed)
 		{
 			this.howManyNeighbours = howManyNeighbours;
-			this.retention = retention;
 			tabuList = new TabuList (retention);
 			bestSolution = seed;
 			bestSolutionValue = evaluateSolution (seed);
@@ -84,11 +82,12 @@ namespace StarcraftBuildOrderApp.tabusearch
 				newNeighbour.doRandomThing (randomOperation);
 				neighbours.Add (newNeighbour);
 				if (tabuList.isOnTabooList (newNeighbour.lastMove) > 0) {
-					i--;
 					if (endlessLoopPrevention > 5) {
 						endlessLoopPrevention = 0;
 						continue;
 					}
+					i--;
+					neighbours.RemoveAt (neighbours.Count - 1);
 				}
 				endlessLoopPrevention++;
 			}

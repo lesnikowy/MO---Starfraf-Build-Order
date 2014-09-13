@@ -29,7 +29,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			Random rnd = new Random ();
 			int howManyUnits = rnd.Next (2, MAXIMUM_UNITS_IN_RANDOM_SOLUTION);
-			for (int i = 2; i < howManyUnits; i++) {
+			for (int i = 0; i < howManyUnits; i++) {
 				items.Add ((unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE));
 			}
 			return this;
