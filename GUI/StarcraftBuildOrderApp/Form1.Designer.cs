@@ -54,6 +54,9 @@
             this.init_size_num = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.rnd_btn = new System.Windows.Forms.Button();
+            this.clc_sc_init_btn = new System.Windows.Forms.Button();
+            this.init_time_lbl = new System.Windows.Forms.Label();
+            this.init_status_lbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.iteration_num)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.del_num)).BeginInit();
@@ -344,7 +347,7 @@
             // init_sol_list
             // 
             this.init_sol_list.FormattingEnabled = true;
-            this.init_sol_list.Location = new System.Drawing.Point(779, 93);
+            this.init_sol_list.Location = new System.Drawing.Point(770, 45);
             this.init_sol_list.Name = "init_sol_list";
             this.init_sol_list.Size = new System.Drawing.Size(133, 212);
             this.init_sol_list.TabIndex = 10;
@@ -353,7 +356,7 @@
             // unit_cmb
             // 
             this.unit_cmb.FormattingEnabled = true;
-            this.unit_cmb.Location = new System.Drawing.Point(779, 60);
+            this.unit_cmb.Location = new System.Drawing.Point(770, 12);
             this.unit_cmb.Name = "unit_cmb";
             this.unit_cmb.Size = new System.Drawing.Size(133, 21);
             this.unit_cmb.TabIndex = 11;
@@ -393,7 +396,7 @@
             // 
             // rnd_btn
             // 
-            this.rnd_btn.Location = new System.Drawing.Point(779, 328);
+            this.rnd_btn.Location = new System.Drawing.Point(770, 269);
             this.rnd_btn.Name = "rnd_btn";
             this.rnd_btn.Size = new System.Drawing.Size(133, 23);
             this.rnd_btn.TabIndex = 14;
@@ -401,11 +404,42 @@
             this.rnd_btn.UseVisualStyleBackColor = true;
             this.rnd_btn.Click += new System.EventHandler(this.rnd_btn_Click);
             // 
+            // clc_sc_init_btn
+            // 
+            this.clc_sc_init_btn.Location = new System.Drawing.Point(770, 298);
+            this.clc_sc_init_btn.Name = "clc_sc_init_btn";
+            this.clc_sc_init_btn.Size = new System.Drawing.Size(133, 23);
+            this.clc_sc_init_btn.TabIndex = 15;
+            this.clc_sc_init_btn.Text = "Calc score";
+            this.clc_sc_init_btn.UseVisualStyleBackColor = true;
+            this.clc_sc_init_btn.Click += new System.EventHandler(this.clc_sc_init_btn_Click);
+            // 
+            // init_time_lbl
+            // 
+            this.init_time_lbl.AutoSize = true;
+            this.init_time_lbl.Location = new System.Drawing.Point(767, 349);
+            this.init_time_lbl.Name = "init_time_lbl";
+            this.init_time_lbl.Size = new System.Drawing.Size(33, 13);
+            this.init_time_lbl.TabIndex = 17;
+            this.init_time_lbl.Text = "Time:";
+            // 
+            // init_status_lbl
+            // 
+            this.init_status_lbl.AutoSize = true;
+            this.init_status_lbl.Location = new System.Drawing.Point(767, 331);
+            this.init_status_lbl.Name = "init_status_lbl";
+            this.init_status_lbl.Size = new System.Drawing.Size(38, 13);
+            this.init_status_lbl.TabIndex = 16;
+            this.init_status_lbl.Text = "Score:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 371);
+            this.Controls.Add(this.init_time_lbl);
+            this.Controls.Add(this.init_status_lbl);
+            this.Controls.Add(this.clc_sc_init_btn);
             this.Controls.Add(this.rnd_btn);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.init_size_num);
@@ -471,6 +505,9 @@
         private System.Windows.Forms.NumericUpDown init_size_num;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button rnd_btn;
+        private System.Windows.Forms.Button clc_sc_init_btn;
+        private System.Windows.Forms.Label init_time_lbl;
+        private System.Windows.Forms.Label init_status_lbl;
 
 
 

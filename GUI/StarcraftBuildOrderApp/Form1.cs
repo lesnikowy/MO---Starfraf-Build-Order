@@ -71,6 +71,25 @@ namespace StarcraftBuildOrderApp
         }
 
 
+        private List<unit_type> generate_from_init_sol()
+        {
+            List<unit_type> tmp_units = new List<unit_type>();
+
+            for (int i = 0; i < init_sol_list.Items.Count; i++)
+            {
+                for (int j = 1; j < (unit_names.Count() - 1); j++)
+                {
+                    if (init_sol_list.Items[i].ToString() == unit_names[j])
+                    {
+                        tmp_units.Add((unit_type)(j));
+                        break;
+                    }
+                }
+            }
+
+            return tmp_units;
+        }
+
 
         private void start_btn_Click(object sender, EventArgs e)
         {
@@ -120,23 +139,11 @@ namespace StarcraftBuildOrderApp
                     return;
 
                 }
-                
-                List<unit_type> tmp_units = new List<unit_type>();
 
-                for (int i = 0; i < init_sol_list.Items.Count; i++)
-                {
-                    for (int j = 1; j < (unit_names.Count() - 1); j++)
-                    {
-                        if (init_sol_list.Items[i].ToString() == unit_names[j])
-                        {
-                            tmp_units.Add((unit_type)(j));
-                            break;
-                        }
-                    }
-                }
-                
-                
-                init_solution = new Solution(tmp_units);
+
+
+
+                init_solution = new Solution(generate_from_init_sol());
                 
             }
 
@@ -264,6 +271,51 @@ namespace StarcraftBuildOrderApp
             for (int i = 0; i < init_size_num.Value; i++)
             {
                 init_sol_list.Items.Add(unit_names[rnd.Next(1,unit_names.Count())]);
+            }
+        }
+
+        private void clc_sc_init_btn_Click(object sender, EventArgs e)
+        {
+            cost.fullfill_coef = (float)(1000);
+            cost.illegal_coef = (float)(10000);
+            cost.ovrload_coef = (float)(10000);
+            cost.clear_req_unit();
+
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < unit_cnt[i].Value; j++)
+                {
+                    cost.add_build_req((unit_type)(i + 2));
+                }
+            }
+
+            if (cost.req_count() == 0)
+            {
+                status_lbl.Text = "Error - no build requirements";
+                start_btn.Enabled = true;
+                stop_btn.Enabled = false;
+                return;
+            }
+
+            cost.add_req_unit();
+
+            List<unit_type> tmp_unit = generate_from_init_sol();
+
+            init_status_lbl.Text = "Score: " + cost.calc(tmp_unit);
+
+            int build_time = cost.calc_time(tmp_unit);
+
+            if (build_time > 0)
+            {
+
+                TimeSpan t = TimeSpan.FromSeconds(build_time);
+
+                init_time_lbl.Text = "Time: " + t.Minutes + ":" + t.Seconds.ToString("00");
+            }
+            else
+            {
+                init_time_lbl.Text = "Can`t calculate build time";
             }
         }
 
