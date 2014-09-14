@@ -36,32 +36,33 @@
             this.lbl1 = new System.Windows.Forms.Label();
             this.time_lbl = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.add_num = new System.Windows.Forms.NumericUpDown();
-            this.exch_num = new System.Windows.Forms.NumericUpDown();
-            this.del_num = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.del_num = new System.Windows.Forms.NumericUpDown();
+            this.exch_num = new System.Windows.Forms.NumericUpDown();
+            this.add_num = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.neig_num = new System.Windows.Forms.NumericUpDown();
-            this.ret_num = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ret_num = new System.Windows.Forms.NumericUpDown();
+            this.neig_num = new System.Windows.Forms.NumericUpDown();
+            this.stop_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.iteration_num)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.add_num)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exch_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.del_num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exch_num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.add_num)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.neig_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ret_num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.neig_num)).BeginInit();
             this.SuspendLayout();
             // 
             // start_btn
             // 
             this.start_btn.Location = new System.Drawing.Point(319, 49);
             this.start_btn.Name = "start_btn";
-            this.start_btn.Size = new System.Drawing.Size(133, 41);
+            this.start_btn.Size = new System.Drawing.Size(64, 41);
             this.start_btn.TabIndex = 0;
             this.start_btn.Text = "START";
             this.start_btn.UseVisualStyleBackColor = true;
@@ -143,53 +144,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Probability generated movements";
             // 
-            // add_num
+            // label3
             // 
-            this.add_num.Location = new System.Drawing.Point(129, 25);
-            this.add_num.Maximum = new decimal(new int[] {
-            98,
-            0,
-            0,
-            0});
-            this.add_num.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.add_num.Name = "add_num";
-            this.add_num.Size = new System.Drawing.Size(50, 20);
-            this.add_num.TabIndex = 0;
-            this.add_num.TabStop = false;
-            this.add_num.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.add_num.ValueChanged += new System.EventHandler(this.add_num_ValueChanged);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "DELETE";
             // 
-            // exch_num
+            // label2
             // 
-            this.exch_num.Location = new System.Drawing.Point(129, 51);
-            this.exch_num.Maximum = new decimal(new int[] {
-            98,
-            0,
-            0,
-            0});
-            this.exch_num.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.exch_num.Name = "exch_num";
-            this.exch_num.Size = new System.Drawing.Size(50, 20);
-            this.exch_num.TabIndex = 1;
-            this.exch_num.TabStop = false;
-            this.exch_num.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            0});
-            this.exch_num.ValueChanged += new System.EventHandler(this.exch_num_ValueChanged);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "EXCHANGE";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "ADD";
             // 
             // del_num
             // 
@@ -215,32 +195,53 @@
             0});
             this.del_num.ValueChanged += new System.EventHandler(this.del_num_ValueChanged);
             // 
-            // label1
+            // exch_num
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "ADD";
+            this.exch_num.Location = new System.Drawing.Point(129, 51);
+            this.exch_num.Maximum = new decimal(new int[] {
+            98,
+            0,
+            0,
+            0});
+            this.exch_num.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.exch_num.Name = "exch_num";
+            this.exch_num.Size = new System.Drawing.Size(50, 20);
+            this.exch_num.TabIndex = 1;
+            this.exch_num.TabStop = false;
+            this.exch_num.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            this.exch_num.ValueChanged += new System.EventHandler(this.exch_num_ValueChanged);
             // 
-            // label2
+            // add_num
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "EXCHANGE";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "DELETE";
+            this.add_num.Location = new System.Drawing.Point(129, 25);
+            this.add_num.Maximum = new decimal(new int[] {
+            98,
+            0,
+            0,
+            0});
+            this.add_num.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.add_num.Name = "add_num";
+            this.add_num.Size = new System.Drawing.Size(50, 20);
+            this.add_num.TabIndex = 0;
+            this.add_num.TabStop = false;
+            this.add_num.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.add_num.ValueChanged += new System.EventHandler(this.add_num_ValueChanged);
             // 
             // groupBox2
             // 
@@ -255,23 +256,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Taboo search";
             // 
-            // neig_num
+            // label5
             // 
-            this.neig_num.Location = new System.Drawing.Point(131, 19);
-            this.neig_num.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.neig_num.Name = "neig_num";
-            this.neig_num.Size = new System.Drawing.Size(50, 20);
-            this.neig_num.TabIndex = 1;
-            this.neig_num.TabStop = false;
-            this.neig_num.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(26, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Retention";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(26, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Neighbours number";
             // 
             // ret_num
             // 
@@ -291,29 +292,41 @@
             0,
             0});
             // 
-            // label4
+            // neig_num
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(99, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Neighbours number";
+            this.neig_num.Location = new System.Drawing.Point(131, 19);
+            this.neig_num.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.neig_num.Name = "neig_num";
+            this.neig_num.Size = new System.Drawing.Size(50, 20);
+            this.neig_num.TabIndex = 1;
+            this.neig_num.TabStop = false;
+            this.neig_num.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
-            // label5
+            // stop_btn
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 45);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Retention";
+            this.stop_btn.Enabled = false;
+            this.stop_btn.Location = new System.Drawing.Point(389, 49);
+            this.stop_btn.Name = "stop_btn";
+            this.stop_btn.Size = new System.Drawing.Size(65, 41);
+            this.stop_btn.TabIndex = 8;
+            this.stop_btn.Text = "STOP";
+            this.stop_btn.UseVisualStyleBackColor = true;
+            this.stop_btn.Click += new System.EventHandler(this.stop_btn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(780, 346);
+            this.Controls.Add(this.stop_btn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.time_lbl);
@@ -327,17 +340,18 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "SC Build Order";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.iteration_num)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.add_num)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.exch_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.del_num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exch_num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.add_num)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.neig_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ret_num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.neig_num)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +377,7 @@
         private System.Windows.Forms.NumericUpDown ret_num;
         private System.Windows.Forms.NumericUpDown neig_num;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button stop_btn;
 
 
 

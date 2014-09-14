@@ -21,7 +21,7 @@ namespace StarcraftBuildOrderApp
         
         private string[] unit_names = new string[] {"NO UNIT", "SCV", "MARINE", "FIREBAT", "GHOST", "VULTURE", "TANK", "GOLIATH", "COMMAND CENTER", "SUPPLY DEPOT", "BARRACKS", "ACADEMY", "FACTORY", "MACHINE SHOP", "ARMORY" };
 
-        private bool disable_change_event = false;
+        private bool stop_iterations = false;
 
         public Form1()
         {
@@ -65,12 +65,17 @@ namespace StarcraftBuildOrderApp
 
         private void start_btn_Click(object sender, EventArgs e)
         {
+
+            start_btn.Enabled = false;
+            stop_btn.Enabled = true;
+
             cost.fullfill_coef = (float)(1000);
             cost.illegal_coef = (float)(10000);
             cost.ovrload_coef = (float)(10000);
             cost.clear_req_unit();
 
             time_lbl.Text = "";
+            stop_iterations = false;
 
             for (int i = 0; i < 6; i++)
             {
@@ -83,6 +88,8 @@ namespace StarcraftBuildOrderApp
             if (cost.req_count() == 0)
             {
                 status_lbl.Text = "Error - no build requirements";
+                start_btn.Enabled = true;
+                stop_btn.Enabled = false;
                 return;
             }
 
@@ -93,7 +100,7 @@ namespace StarcraftBuildOrderApp
 
             int iter_num = (int)(iteration_num.Value);
 
-            for (int i = 0; i < iter_num; i++)
+            for (int i = 0; i < iter_num && !stop_iterations; i++)
             {
                 s = tabu.iterate(s);
                 status_lbl.Text = "Best score: " + tabu.bestSolutionValue + ", \t" + (int)(i + 1) + "/" + iter_num;
@@ -113,8 +120,9 @@ namespace StarcraftBuildOrderApp
 
 
             //sol_lbl.Text = tabu.bestSolution.ToString();
-           
 
+            start_btn.Enabled = true;
+            stop_btn.Enabled = false;
         }
 
     
@@ -152,6 +160,16 @@ namespace StarcraftBuildOrderApp
         private void del_num_ValueChanged(object sender, EventArgs e)
         {
             change_num(add_num, exch_num);
+        }
+
+        private void stop_btn_Click(object sender, EventArgs e)
+        {
+            stop_iterations = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stop_iterations = true;
         }
 
 
