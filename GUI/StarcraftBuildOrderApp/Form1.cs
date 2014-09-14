@@ -19,6 +19,7 @@ namespace StarcraftBuildOrderApp
         private Label[] unit_label = new Label[6];
         private NumericUpDown[] unit_cnt = new NumericUpDown[6];
         
+        
         private string[] unit_names = new string[] {"NO UNIT", "SCV", "MARINE", "FIREBAT", "GHOST", "VULTURE", "TANK", "GOLIATH", "COMMAND CENTER", "SUPPLY DEPOT", "BARRACKS", "ACADEMY", "FACTORY", "MACHINE SHOP", "ARMORY" };
 
         private bool stop_iterations = false;
@@ -30,12 +31,16 @@ namespace StarcraftBuildOrderApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CreatingNewButtons();
+            CreateNewControls();
+            for (int i = 1; i < (unit_names.Count() - 1); i++)
+            {
+                unit_cmb.Items.Add(unit_names[i]);
+            }
             
         }
 
 
-        private void CreatingNewButtons()
+        private void CreateNewControls()
         {
             int vertical = 40;
 
@@ -59,6 +64,10 @@ namespace StarcraftBuildOrderApp
                 this.Controls.Add(unit_label[i]);
                 this.Controls.Add(unit_cnt[i]);
             }
+
+          
+
+
         }
 
 
@@ -94,7 +103,44 @@ namespace StarcraftBuildOrderApp
             }
 
             cost.add_req_unit();
-            TabuSearch tabu = new TabuSearch((int)(neig_num.Value), (int)(ret_num.Value), new Solution(20));
+
+            Solution init_solution;
+
+            if (rand_sol_chck.Checked)
+            {
+                init_solution = new Solution((int)(init_size_num.Value));
+            }
+            else
+            {
+                if (init_sol_list.Items.Count == 0)
+                {
+                    status_lbl.Text = "Error - no initial solution";
+                    start_btn.Enabled = true;
+                    stop_btn.Enabled = false;
+                    return;
+
+                }
+                
+                List<unit_type> tmp_units = new List<unit_type>();
+
+                for (int i = 0; i < init_sol_list.Items.Count; i++)
+                {
+                    for (int j = 1; j < (unit_names.Count() - 1); j++)
+                    {
+                        if (init_sol_list.Items[i].ToString() == unit_names[j])
+                        {
+                            tmp_units.Add((unit_type)(j));
+                            break;
+                        }
+                    }
+                }
+                
+                
+                init_solution = new Solution(tmp_units);
+                
+            }
+
+            TabuSearch tabu = new TabuSearch((int)(neig_num.Value), (int)(ret_num.Value), init_solution);
             tabu.setOperationsProbability((int)(add_num.Value), (int)(exch_num.Value), (int)(del_num.Value));
             Solution s = tabu.iterate(tabu.bestSolution);
 
@@ -109,7 +155,19 @@ namespace StarcraftBuildOrderApp
             }
 
 
-            time_lbl.Text = "Best time: " + cost.calc_time(tabu.bestSolution.getEnums());
+            int build_time = cost.calc_time(tabu.bestSolution.getEnums());
+
+            if (build_time > 0)
+            {
+
+                TimeSpan t = TimeSpan.FromSeconds(build_time);
+
+                time_lbl.Text = "Best time: " + t.Minutes + ":" + t.Seconds.ToString("00");
+            }
+            else
+            {
+                time_lbl.Text = "Can`t calculate build time";
+            }
 
             sol_list.Items.Clear();
 
@@ -170,6 +228,43 @@ namespace StarcraftBuildOrderApp
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             stop_iterations = true;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rand_sol_chck.Checked)
+            {
+                this.Width = 750;
+            }
+            else
+            {
+                this.Width = 946;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            init_sol_list.Items.Add(unit_cmb.Text);
+        }
+
+        private void init_sol_list_DoubleClick(object sender, EventArgs e)
+        {
+            if (init_sol_list.SelectedIndex >= 0)
+            {
+                init_sol_list.Items.RemoveAt(init_sol_list.SelectedIndex);
+            }
+        }
+
+        private void rnd_btn_Click(object sender, EventArgs e)
+        {
+            init_sol_list.Items.Clear();
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < init_size_num.Value; i++)
+            {
+                init_sol_list.Items.Add(unit_names[rnd.Next(1,unit_names.Count())]);
+            }
         }
 
 

@@ -19,6 +19,12 @@ namespace StarcraftBuildOrderApp.tabusearch
 			createRandomSolution (10);
 		}
 
+        public Solution(List<unit_type> units)
+        {
+            this.items = new List<unit_type>(units);
+            this.lastMove = new TabuListItem();
+        }
+
 		public Solution(int maxUnitsInRandomSolution)
 		{
 			items = new List<unit_type>();

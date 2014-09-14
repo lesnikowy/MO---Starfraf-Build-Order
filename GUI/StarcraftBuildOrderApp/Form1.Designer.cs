@@ -48,6 +48,12 @@
             this.ret_num = new System.Windows.Forms.NumericUpDown();
             this.neig_num = new System.Windows.Forms.NumericUpDown();
             this.stop_btn = new System.Windows.Forms.Button();
+            this.rand_sol_chck = new System.Windows.Forms.CheckBox();
+            this.init_sol_list = new System.Windows.Forms.ListBox();
+            this.unit_cmb = new System.Windows.Forms.ComboBox();
+            this.init_size_num = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.rnd_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.iteration_num)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.del_num)).BeginInit();
@@ -56,6 +62,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ret_num)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.neig_num)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.init_size_num)).BeginInit();
             this.SuspendLayout();
             // 
             // start_btn
@@ -82,7 +89,7 @@
             this.sol_list.FormattingEnabled = true;
             this.sol_list.Location = new System.Drawing.Point(326, 159);
             this.sol_list.Name = "sol_list";
-            this.sol_list.Size = new System.Drawing.Size(128, 147);
+            this.sol_list.Size = new System.Drawing.Size(128, 186);
             this.sol_list.TabIndex = 2;
             // 
             // iteration_num
@@ -321,11 +328,90 @@
             this.stop_btn.UseVisualStyleBackColor = true;
             this.stop_btn.Click += new System.EventHandler(this.stop_btn_Click);
             // 
+            // rand_sol_chck
+            // 
+            this.rand_sol_chck.AutoSize = true;
+            this.rand_sol_chck.Checked = true;
+            this.rand_sol_chck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.rand_sol_chck.Location = new System.Drawing.Point(527, 308);
+            this.rand_sol_chck.Name = "rand_sol_chck";
+            this.rand_sol_chck.Size = new System.Drawing.Size(142, 17);
+            this.rand_sol_chck.TabIndex = 9;
+            this.rand_sol_chck.Text = "Randomize inital solution";
+            this.rand_sol_chck.UseVisualStyleBackColor = true;
+            this.rand_sol_chck.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // init_sol_list
+            // 
+            this.init_sol_list.FormattingEnabled = true;
+            this.init_sol_list.Location = new System.Drawing.Point(779, 93);
+            this.init_sol_list.Name = "init_sol_list";
+            this.init_sol_list.Size = new System.Drawing.Size(133, 212);
+            this.init_sol_list.TabIndex = 10;
+            this.init_sol_list.DoubleClick += new System.EventHandler(this.init_sol_list_DoubleClick);
+            // 
+            // unit_cmb
+            // 
+            this.unit_cmb.FormattingEnabled = true;
+            this.unit_cmb.Location = new System.Drawing.Point(779, 60);
+            this.unit_cmb.Name = "unit_cmb";
+            this.unit_cmb.Size = new System.Drawing.Size(133, 21);
+            this.unit_cmb.TabIndex = 11;
+            this.unit_cmb.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // init_size_num
+            // 
+            this.init_size_num.Location = new System.Drawing.Point(647, 331);
+            this.init_size_num.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.init_size_num.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.init_size_num.Name = "init_size_num";
+            this.init_size_num.Size = new System.Drawing.Size(50, 20);
+            this.init_size_num.TabIndex = 12;
+            this.init_size_num.TabStop = false;
+            this.init_size_num.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(524, 333);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "Initial solution size";
+            // 
+            // rnd_btn
+            // 
+            this.rnd_btn.Location = new System.Drawing.Point(779, 328);
+            this.rnd_btn.Name = "rnd_btn";
+            this.rnd_btn.Size = new System.Drawing.Size(133, 23);
+            this.rnd_btn.TabIndex = 14;
+            this.rnd_btn.Text = "Randomize";
+            this.rnd_btn.UseVisualStyleBackColor = true;
+            this.rnd_btn.Click += new System.EventHandler(this.rnd_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 346);
+            this.ClientSize = new System.Drawing.Size(744, 371);
+            this.Controls.Add(this.rnd_btn);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.init_size_num);
+            this.Controls.Add(this.unit_cmb);
+            this.Controls.Add(this.init_sol_list);
+            this.Controls.Add(this.rand_sol_chck);
             this.Controls.Add(this.stop_btn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -352,6 +438,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ret_num)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.neig_num)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.init_size_num)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -378,6 +465,12 @@
         private System.Windows.Forms.NumericUpDown neig_num;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button stop_btn;
+        private System.Windows.Forms.CheckBox rand_sol_chck;
+        private System.Windows.Forms.ListBox init_sol_list;
+        private System.Windows.Forms.ComboBox unit_cmb;
+        private System.Windows.Forms.NumericUpDown init_size_num;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button rnd_btn;
 
 
 

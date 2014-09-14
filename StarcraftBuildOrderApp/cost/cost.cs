@@ -64,7 +64,7 @@ namespace StarcraftBuildOrderApp.cost_calc
             Array.Clear(build_req_unit_count, 0, (int)(unit_type.UNIT_TYPE_SIZE));
         }
 
-        public static float calc_time(List<unit_type> raw_unit_vector)
+        public static int calc_time(List<unit_type> raw_unit_vector)
         {
             sim sim_unit = new sim();
             unit_list = build_unit_list(raw_unit_vector);
@@ -95,11 +95,11 @@ namespace StarcraftBuildOrderApp.cost_calc
 
             if (illegal_unit_cnt == 0)
             {
-                return (float)(sim_unit.run(unit_list));
+                return (int)(sim_unit.run(unit_list));
             }
             else
             {
-                return (float)(-1);
+                return(-1);
             }
         }
 
