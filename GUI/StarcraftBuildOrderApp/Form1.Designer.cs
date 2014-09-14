@@ -57,6 +57,7 @@
             this.clc_sc_init_btn = new System.Windows.Forms.Button();
             this.init_time_lbl = new System.Windows.Forms.Label();
             this.init_status_lbl = new System.Windows.Forms.Label();
+            this.show_graph_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.iteration_num)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.del_num)).BeginInit();
@@ -70,7 +71,7 @@
             // 
             // start_btn
             // 
-            this.start_btn.Location = new System.Drawing.Point(319, 49);
+            this.start_btn.Location = new System.Drawing.Point(318, 28);
             this.start_btn.Name = "start_btn";
             this.start_btn.Size = new System.Drawing.Size(64, 41);
             this.start_btn.TabIndex = 0;
@@ -81,7 +82,7 @@
             // status_lbl
             // 
             this.status_lbl.AutoSize = true;
-            this.status_lbl.Location = new System.Drawing.Point(323, 109);
+            this.status_lbl.Location = new System.Drawing.Point(322, 88);
             this.status_lbl.Name = "status_lbl";
             this.status_lbl.Size = new System.Drawing.Size(60, 13);
             this.status_lbl.TabIndex = 1;
@@ -90,7 +91,7 @@
             // sol_list
             // 
             this.sol_list.FormattingEnabled = true;
-            this.sol_list.Location = new System.Drawing.Point(326, 159);
+            this.sol_list.Location = new System.Drawing.Point(325, 138);
             this.sol_list.Name = "sol_list";
             this.sol_list.Size = new System.Drawing.Size(128, 186);
             this.sol_list.TabIndex = 2;
@@ -134,7 +135,7 @@
             // time_lbl
             // 
             this.time_lbl.AutoSize = true;
-            this.time_lbl.Location = new System.Drawing.Point(323, 130);
+            this.time_lbl.Location = new System.Drawing.Point(322, 109);
             this.time_lbl.Name = "time_lbl";
             this.time_lbl.Size = new System.Drawing.Size(0, 13);
             this.time_lbl.TabIndex = 5;
@@ -323,7 +324,7 @@
             // stop_btn
             // 
             this.stop_btn.Enabled = false;
-            this.stop_btn.Location = new System.Drawing.Point(389, 49);
+            this.stop_btn.Location = new System.Drawing.Point(388, 28);
             this.stop_btn.Name = "stop_btn";
             this.stop_btn.Size = new System.Drawing.Size(65, 41);
             this.stop_btn.TabIndex = 8;
@@ -432,11 +433,22 @@
             this.init_status_lbl.TabIndex = 16;
             this.init_status_lbl.Text = "Score:";
             // 
+            // show_graph_btn
+            // 
+            this.show_graph_btn.Location = new System.Drawing.Point(325, 330);
+            this.show_graph_btn.Name = "show_graph_btn";
+            this.show_graph_btn.Size = new System.Drawing.Size(128, 32);
+            this.show_graph_btn.TabIndex = 18;
+            this.show_graph_btn.Text = "Graph";
+            this.show_graph_btn.UseVisualStyleBackColor = true;
+            this.show_graph_btn.Click += new System.EventHandler(this.show_graph_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(744, 371);
+            this.ClientSize = new System.Drawing.Size(744, 383);
+            this.Controls.Add(this.show_graph_btn);
             this.Controls.Add(this.init_time_lbl);
             this.Controls.Add(this.init_status_lbl);
             this.Controls.Add(this.clc_sc_init_btn);
@@ -508,6 +520,7 @@
         private System.Windows.Forms.Button clc_sc_init_btn;
         private System.Windows.Forms.Label init_time_lbl;
         private System.Windows.Forms.Label init_status_lbl;
+        private System.Windows.Forms.Button show_graph_btn;
 
 
 

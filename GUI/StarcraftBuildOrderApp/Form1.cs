@@ -18,8 +18,11 @@ namespace StarcraftBuildOrderApp
 
         private Label[] unit_label = new Label[6];
         private NumericUpDown[] unit_cnt = new NumericUpDown[6];
-        
-        
+
+        public static  float[] local_score;
+        public static float[] best_score;
+        public static int iterations_done;
+
         private string[] unit_names = new string[] {"NO UNIT", "SCV", "MARINE", "FIREBAT", "GHOST", "VULTURE", "TANK", "GOLIATH", "COMMAND CENTER", "SUPPLY DEPOT", "BARRACKS", "ACADEMY", "FACTORY", "MACHINE SHOP", "ARMORY" };
 
         private bool stop_iterations = false;
@@ -152,15 +155,23 @@ namespace StarcraftBuildOrderApp
             Solution s = tabu.iterate(tabu.bestSolution);
 
             int iter_num = (int)(iteration_num.Value);
+             local_score = new float[iter_num];
+             best_score = new float[iter_num];
+             iterations_done = 0;
 
-            for (int i = 0; i < iter_num && !stop_iterations; i++)
+             int iter;
+
+             for (iter = 0; iter < iter_num && !stop_iterations; iter++)
             {
                 s = tabu.iterate(s);
-                status_lbl.Text = "Best score: " + tabu.bestSolutionValue + ", \t" + (int)(i + 1) + "/" + iter_num;
+                local_score[iter] = s.cost;
+                best_score[iter] = tabu.bestSolutionValue;
+                status_lbl.Text = "Best score: " + tabu.bestSolutionValue + ", \t" + (int)(iter + 1) + "/" + iter_num;
+                
                 Application.DoEvents();
 
             }
-
+             iterations_done = iter;
 
             int build_time = cost.calc_time(tabu.bestSolution.getEnums());
 
@@ -325,6 +336,13 @@ namespace StarcraftBuildOrderApp
             {
                 init_time_lbl.Text = "Can`t calculate build time";
             }
+        }
+
+        private void show_graph_btn_Click(object sender, EventArgs e)
+        {
+            Form2 graph_frm = new Form2();
+
+            graph_frm.Show();
         }
 
 
