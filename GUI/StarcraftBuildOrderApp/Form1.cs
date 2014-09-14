@@ -251,7 +251,15 @@ namespace StarcraftBuildOrderApp
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            init_sol_list.Items.Add(unit_cmb.Text);
+            if (init_sol_list.SelectedIndex >= 0)
+            {
+                init_sol_list.Items.Insert(init_sol_list.SelectedIndex, unit_cmb.Text);
+            }
+            else
+            {
+                init_sol_list.Items.Add(unit_cmb.Text);
+            }
+           
         }
 
         private void init_sol_list_DoubleClick(object sender, EventArgs e)
