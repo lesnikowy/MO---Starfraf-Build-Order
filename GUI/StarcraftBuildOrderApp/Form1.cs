@@ -21,6 +21,8 @@ namespace StarcraftBuildOrderApp
         
         private string[] unit_names = new string[] {"NO UNIT", "SCV", "MARINE", "FIREBAT", "GHOST", "VULTURE", "TANK", "GOLIATH", "COMMAND CENTER", "SUPPLY DEPOT", "BARRACKS", "ACADEMY", "FACTORY", "MACHINE SHOP", "ARMORY" };
 
+        private bool disable_change_event = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -29,6 +31,7 @@ namespace StarcraftBuildOrderApp
         private void Form1_Load(object sender, EventArgs e)
         {
             CreatingNewButtons();
+            
         }
 
 
@@ -67,6 +70,8 @@ namespace StarcraftBuildOrderApp
             cost.ovrload_coef = (float)(10000);
             cost.clear_req_unit();
 
+            time_lbl.Text = "";
+
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < unit_cnt[i].Value; j++)
@@ -82,8 +87,8 @@ namespace StarcraftBuildOrderApp
             }
 
             cost.add_req_unit();
-            TabuSearch tabu = new TabuSearch(10, 10, new Solution(20));
-            tabu.setOperationsProbability(10, 80, 10);
+            TabuSearch tabu = new TabuSearch((int)(neig_num.Value), (int)(ret_num.Value), new Solution(20));
+            tabu.setOperationsProbability((int)(add_num.Value), (int)(exch_num.Value), (int)(del_num.Value));
             Solution s = tabu.iterate(tabu.bestSolution);
 
             int iter_num = (int)(iteration_num.Value);
@@ -95,6 +100,9 @@ namespace StarcraftBuildOrderApp
                 Application.DoEvents();
 
             }
+
+
+            time_lbl.Text = "Best time: " + cost.calc_time(tabu.bestSolution.getEnums());
 
             sol_list.Items.Clear();
 
@@ -108,6 +116,44 @@ namespace StarcraftBuildOrderApp
            
 
         }
+
+    
+
+
+        private void change_num(NumericUpDown second, NumericUpDown third)
+        {
+            int sum = (int)(add_num.Value + exch_num.Value + del_num.Value);
+            int nxt = (int)(second.Value);
+
+            if ((nxt - (sum - 100)) < 1)
+            {
+                second.Value = 1;
+                third.Value -= (sum - 100);
+            }
+            else
+            {
+                second.Value = nxt - (sum - 100);
+            }
+        }
+
+        private void add_num_ValueChanged(object sender, EventArgs e)
+        {
+            change_num(exch_num, del_num);
+           
+         
+        }
+
+        private void exch_num_ValueChanged(object sender, EventArgs e)
+        {
+            change_num(del_num, add_num);
+           
+        }
+
+        private void del_num_ValueChanged(object sender, EventArgs e)
+        {
+            change_num(add_num, exch_num);
+        }
+
 
 
 

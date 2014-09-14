@@ -64,6 +64,44 @@ namespace StarcraftBuildOrderApp.cost_calc
             Array.Clear(build_req_unit_count, 0, (int)(unit_type.UNIT_TYPE_SIZE));
         }
 
+        public static float calc_time(List<unit_type> raw_unit_vector)
+        {
+            sim sim_unit = new sim();
+            unit_list = build_unit_list(raw_unit_vector);
+
+            int illegal_unit_cnt = 0;
+            for (int i = 1; i < unit_list.Count(); i++)
+            {
+
+                for (int req = 0; req < unit_list[i].requirements.Count(); req++)
+                {
+                    bool legal_unit = false;
+                    for (int j = i - 1; j >= 0; j--)
+                    {
+                        if (unit_list[i].requirements[req] == unit_list[j].u_type)
+                        {
+                            legal_unit = true;
+                            break;
+                        }
+                    }
+
+                    if (!legal_unit)
+                    {
+                        illegal_unit_cnt++;
+                        break;
+                    }
+                }
+            }
+
+            if (illegal_unit_cnt == 0)
+            {
+                return (float)(sim_unit.run(unit_list));
+            }
+            else
+            {
+                return (float)(-1);
+            }
+        }
 
         public static float calc(List<unit_type> raw_unit_vector)
         {
@@ -177,6 +215,8 @@ namespace StarcraftBuildOrderApp.cost_calc
             
             
         }
+
+
 
 
         private static List<unit> build_unit_list(List<unit_type> raw_unit_vector)
