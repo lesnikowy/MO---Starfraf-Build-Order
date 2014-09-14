@@ -20,6 +20,11 @@ namespace StarcraftBuildOrderApp.cost_calc
         private static List<unit> unit_list = new List<unit>();
         private static List<unit> req_unit_list = new List<unit>();
 
+        public static int req_count()
+        {
+            return req_unit_list.Count;
+        }
+
         public static void add_build_req(unit_type unit_t)
         {
 
@@ -51,6 +56,12 @@ namespace StarcraftBuildOrderApp.cost_calc
                     }
                 }
             }
+        }
+
+        public static void clear_req_unit()
+        {
+            req_unit_list.Clear();
+            Array.Clear(build_req_unit_count, 0, (int)(unit_type.UNIT_TYPE_SIZE));
         }
 
 

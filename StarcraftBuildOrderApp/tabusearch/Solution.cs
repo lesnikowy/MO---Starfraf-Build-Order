@@ -102,6 +102,8 @@ namespace StarcraftBuildOrderApp.tabusearch
 			}
 			Console.WriteLine (s + " ]"); 
 		}
+
+        
 	}
 }
 
