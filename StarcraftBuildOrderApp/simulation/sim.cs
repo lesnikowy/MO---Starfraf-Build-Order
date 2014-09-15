@@ -145,7 +145,7 @@ namespace StarcraftBuildOrderApp.simulation
         private uint count_unit_type(unit_type ref_type) {
             uint cnt = 0;
             for (int i = 0; i < unit_list.Count; i++) {
-                if (ref_type == unit_list[i].u_type) {
+                if (ref_type == unit_list[i].u_type && unit_list[i].get_state() == unit_state.READY) {
                     cnt++;
                 }
             }
