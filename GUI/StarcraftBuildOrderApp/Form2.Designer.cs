@@ -40,7 +40,6 @@
             // chart1
             // 
             chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.AxisY.Minimum = 10D;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
@@ -61,6 +60,7 @@
             this.chart1.Size = new System.Drawing.Size(707, 395);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // Form2
             // 

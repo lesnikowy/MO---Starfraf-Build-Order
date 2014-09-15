@@ -196,7 +196,7 @@ namespace StarcraftBuildOrderApp.cost_calc
             {
                 float score = (float)(sim_unit.run(unit_list));
 
-                if (score == 0) //if simulator return 0, something wrong happend
+                if (score <= 0) //if simulator return 0, something wrong happend
                 {
                     return float.MaxValue;
                 }
