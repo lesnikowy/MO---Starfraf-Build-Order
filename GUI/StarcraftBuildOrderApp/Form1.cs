@@ -345,6 +345,23 @@ namespace StarcraftBuildOrderApp
             graph_frm.Show();
         }
 
+        private void sol_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sol_list_Click(object sender, EventArgs e)
+        {
+            string tmp = "";
+
+            for (int i = 0; i < sol_list.Items.Count; i++)
+            {
+                tmp += sol_list.Items[i].ToString() + Environment.NewLine; 
+            }
+
+            Clipboard.SetText(tmp);
+        }
+
 
 
 

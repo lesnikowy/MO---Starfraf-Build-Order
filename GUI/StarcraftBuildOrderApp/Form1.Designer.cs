@@ -95,6 +95,8 @@
             this.sol_list.Name = "sol_list";
             this.sol_list.Size = new System.Drawing.Size(128, 186);
             this.sol_list.TabIndex = 2;
+            this.sol_list.Click += new System.EventHandler(this.sol_list_Click);
+            this.sol_list.SelectedIndexChanged += new System.EventHandler(this.sol_list_SelectedIndexChanged);
             // 
             // iteration_num
             // 
