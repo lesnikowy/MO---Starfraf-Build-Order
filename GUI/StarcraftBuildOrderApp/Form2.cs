@@ -18,8 +18,8 @@ namespace StarcraftBuildOrderApp
             InitializeComponent();
 
             chart1.Location = new Point(0, 0);
-            chart1.Width = this.Width;
-            chart1.Height = this.Height;
+            chart1.Width = this.ClientSize.Width;
+            chart1.Height = this.ClientSize.Height;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -41,6 +41,7 @@ namespace StarcraftBuildOrderApp
 
             chart1.ChartAreas[0].RecalculateAxesScale();
             chart1.ChartAreas[0].AxisY.IsStartedFromZero = false;
+            chart1.ChartAreas[0].AxisX.IsStartedFromZero = true;
 
             
 
@@ -48,8 +49,8 @@ namespace StarcraftBuildOrderApp
 
         private void Form2_ResizeEnd(object sender, EventArgs e)
         {
-            chart1.Width = this.Width;
-            chart1.Height = this.Height;
+            chart1.Width = this.ClientSize.Width;
+            chart1.Height = this.ClientSize.Height;
         }
 
         private void chart1_Click(object sender, EventArgs e)

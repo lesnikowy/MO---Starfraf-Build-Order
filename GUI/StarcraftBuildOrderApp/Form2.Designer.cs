@@ -39,6 +39,7 @@
             // 
             // chart1
             // 
+            chartArea1.AxisX.Minimum = 0D;
             chartArea1.AxisY.IsLogarithmic = true;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
