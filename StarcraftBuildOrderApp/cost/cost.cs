@@ -135,6 +135,14 @@ namespace StarcraftBuildOrderApp.cost_calc
 
                             fulfillment += Math.Abs(build_req_unit_count[i] - build_unit_count[i]);
                         }
+                        else
+                        {
+                            if (build_unit_count[i] == 0)
+                            {
+                                fulfillment += 1;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -151,13 +159,13 @@ namespace StarcraftBuildOrderApp.cost_calc
             // check correctness of build order 
 
             int illegal_unit_cnt = 0;
-            uint total_supply = 0;
+            uint total_supply = 0; 
             uint used_supply = 0;
             uint supply_overload = 0;
 
            
 
-            for (int i = 1; i < unit_list.Count() ; i++)
+            for (int i = 0; i < unit_list.Count() ; i++)
             {
                 used_supply += unit_list[i].supply_usage;
                 total_supply += unit_list[i].supply;
