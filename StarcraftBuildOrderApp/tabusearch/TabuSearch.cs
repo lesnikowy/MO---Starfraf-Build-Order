@@ -42,16 +42,23 @@ namespace StarcraftBuildOrderApp.tabusearch
 			{
 				Solution nb = neighbours[i];
 				float value = evaluateSolution(nb);
-				/* if (tabuList.isOnTabooList(nb.lastMove)) {
-					if (value < localBestTLValue) {
-						localBestTL = nb;
-						localBestTLValue = value;
-					}
-				} else { */
 				if (value < localBestValue) {
 					localBest = nb;
                     localBest.cost = value;
 					localBestValue = value;
+				}
+			}
+
+			// Find lowest cost neighbours from TL
+			List<Solution> neighboursTL = createNeighboursFromTL(solution);
+			for(int i=0;i<neighboursTL.Count;i++)
+			{
+				Solution nb = neighboursTL[i];
+				float value = evaluateSolution(nb);
+				if (value < localBestTLValue) {
+					localBestTL = nb;
+					localBestTL.cost = value;
+					localBestTLValue = value;
 				}
 			}
 			// Update TL
@@ -60,7 +67,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 				localBest = neighbours [0];
 			nextSolution = localBest;
 
-			// Choose best solution
+			// Choose best solution (aspiration criteria)
 			if (localBestValue < localBestTLValue && localBestValue < bestSolutionValue) {
 				bestSolution = localBest;
 				bestSolutionValue = localBestValue;
@@ -116,6 +123,26 @@ namespace StarcraftBuildOrderApp.tabusearch
 					neighbours.RemoveAt (neighbours.Count - 1);
 				}
 				endlessLoopPrevention++;
+			}
+			return neighbours;
+		}
+			
+		private List<Solution> createNeighboursFromTL(Solution solution) {
+			List<Solution> neighbours = new List<Solution>();
+			for (int i=0;i<tabuList.tabulist.Count;i++)
+			{
+				TabuListItem item = tabuList.tabulist [i];
+				Solution neighbour = new Solution(solution);
+				if (item.type == ItemType.EXCHANGE) {
+					if (neighbour.exchangeUnits (item.indexA, item.indexB) == false)
+						continue;
+				} else if (item.type == ItemType.ADDING) {
+					if (neighbour.removeUnit (item.indexA) == false)
+						continue;
+				} else {
+					neighbour.addUnit (item.unitA);
+				}
+				neighbours.Add (neighbour);
 			}
 			return neighbours;
 		}

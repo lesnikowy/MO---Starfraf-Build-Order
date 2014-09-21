@@ -6,7 +6,7 @@ namespace StarcraftBuildOrderApp.tabusearch
 {
 	public class TabuList
 	{
-		private List<TabuListItem> tabulist;
+		public List<TabuListItem> tabulist;
 		private int retention;
 
 		public TabuList(int retention)

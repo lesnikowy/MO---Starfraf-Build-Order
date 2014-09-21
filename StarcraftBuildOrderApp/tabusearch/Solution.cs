@@ -52,6 +52,11 @@ namespace StarcraftBuildOrderApp.tabusearch
 		{
 			Random rnd = new Random ();
 			unit_type unit = (unit_type)rnd.Next (1, (int)unit_type.UNIT_TYPE_SIZE);
+			addUnit (unit);
+		}
+
+		public void addUnit(unit_type unit)
+		{
 			items.Add (unit);
 			lastMove.setToAdding (items.Count, unit);
 		}
@@ -75,21 +80,35 @@ namespace StarcraftBuildOrderApp.tabusearch
 				endlessLoopPrevention++;
 			}
 			// swap elements
+			exchangeUnits (indexA, indexB);
+		}
+
+		public bool exchangeUnits(int indexA, int indexB)
+		{
+			if (indexA >= items.Count || indexB >= items.Count)
+				return false;
 			unit_type temp = items [indexA];
 			items [indexA] = items [indexB];
 			items [indexB] = temp;
-
 			lastMove.setToExchange (indexA, items [indexA], indexB, items [indexB]);
+			return true;
 		}
 
 		public void removeUnit()
 		{
 			Random rnd = new Random ();
 			int index = rnd.Next (0, items.Count);
+			removeUnit (index);
+		}
+
+		public bool removeUnit(int index)
+		{
+			if (index >= items.Count)
+				return false;
 			unit_type unit = items [index];
 			items.RemoveAt(index);
 			lastMove.setToDelete (index, unit);
-
+			return true;
 		}
 
 		public int getItemsQuantity()
